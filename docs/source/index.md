@@ -1,31 +1,43 @@
 ---
-title: 不同的编程语言
+title: Different Languages in Selenium/Webdriver2 Testing
 
 language_tabs:
+  - shell
   - ruby
   - python
   - java
   - javascript
 
+
 toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - basic.md
-  - file_io.md
-  - collections.md
-  - threads.md
-  - functional.md
+  - errors
 
 search: true
 ---
 
 # Introduction
 
-本文档用来记录不同语言的基础用法，主要的语言包括了：
+本文档用来描述不同语言使用selenium的时候的用法，主要的语言包括了：
 
 - Java
 - Ruby
 - Python
 - Javascript
-- shell
+
+## Selenium Driver的启动
+
+## Selenium Driver的配置
+
+## Selenium 定位元素
+
+## Selenium Page Factory模式
+
+## 自动化测试常用框架
+
+## XPath VS CSS selector
+
+## 自动化测试框架定制
