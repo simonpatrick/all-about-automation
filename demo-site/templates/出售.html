@@ -1,0 +1,1037 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html ng-app="com.dooioo.fy" ng-cloak>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head ng-controller="FyController">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>房源列表 - 德佑地产</title>
+    <script type="text/javascript"> var headerParameters={ empNo:'110863', empName:'吴科', env:"production"}; </script>
+
+
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css?v=20150318">
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/fky.css?v=20150318">
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/treeNew.css?v=20150318">
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/header.css?v=20150318">
+    <link rel="stylesheet" href="http://dui.dooioo.com/public/css/tipsNotice.css?v=20150318" type="text/css" />
+
+
+
+
+
+    <link type="text/css" rel="stylesheet" href="/static/css/house.css?v=20150318">
+
+
+
+
+
+    <script type="text/javascript">
+        var ubt_js = "<script src='http://logment.dooioo.com/ubt.js' type='text/javascript'><\/script>";
+        document.write(ubt_js);
+    </script>
+
+
+
+
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/lib/jquery-1.6.2.min.js?v=20150318"></script>
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/lib/angular.min.js?v=20150318"></script>
+    <script type="text/javascript" src="/static/js/fy/contact/popup.js?v=20150318"></script>
+    <script type="text/javascript">
+        //配置全局ajax请求默认返回类型
+        $.ajaxSetup({
+            dataType: "html",
+            error:function(XMLHttpRequest){
+                //风险预警警告
+                if(XMLHttpRequest.status === 600){
+                    if(XMLHttpRequest.responseText.indexOf('risk_warn') !== -1){
+                        removePopLayer();
+                        var rs = eval("("+XMLHttpRequest.responseText+")");
+                        window_risk_warn(rs.message);
+                        return false;
+                    }
+                }
+            }
+        });
+
+        //初始化各系统及各环境下的地址
+        var ResourceMap = new Object();
+        ResourceMap = angular.fromJson({"G_ADDR_DUI":"http://dui.dooioo.com","G_API_UPDATEESTATEFLOORALL":"http://loupan.dooioo.com/api/estate/#estateId#/updateFloorAll","G_ADDR_WS":"ws://fy.dooioo.com","G_ADDR_USER_AUTH":"http://login.dooioo.com","G_API_PROPERTYSYNCPIC":"http://192.168.0.234:8080/api/property/syncPic?path=#path#","g_api_queryphonenumberarea":"http://duanxin.dooioo.com/sms/api/phoneArea?phone=#phoneNumber#","g_api_initsendsmsflag":"http://duanxin.dooioo.com/sms/api/pushPropertyMq","g_api_queryLayoutPicByBuildingAndRoom":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByBuildingAndRoom","G_ADDR_LJK":"http://ljk.dooioo.com","G_API_QUERYPHONENUMBERAREA":"http://duanxin.dooioo.com/sms/api/phoneArea?phone=#phoneNumber#","G_ADDR_WZT":"http://guanggao.dooioo.com","g_api_propertysyncpic":"http://192.168.0.234:8080/api/property/syncPic?path=#path#","G_API_SENDMSGTOSTAFF":"http://duanxin.dooioo.com/api/tools/sendMsg","g_api_queryCertificatedLayoutPic":"http://loupan.dooioo.com/api/estate/queryCertificatedLayoutPic/#propertyId#","g_api_noticelimitentrusttobillsystem":"http://feiyong.dooioo.com/api/getSignRepay?estateNo=#estateNo#&signStatus=#signStatus#&signTime=#signTime#&orgId=#orgId#&empNo=#empNo#&limitId=#limitId#&limitTransferFlag=#limitTransferFlag#&isNoReceivePay=#isNoReceivePay#","G_ADDR_WS_IMPORT":"ws://local.dooioo.com:8083","g_api_syncgeneratepics":"http://loupan.dooioo.com/api/estate/syncGeneratePics","G_API_QUERYLAYOUTPICBYBUILDINGANDROOM":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByBuildingAndRoom","g_addr_zzjg":"http://zzjg.dooioo.com","g_addr_headpic":"http://fs.dooioo.com/fetch/vp/touxiang","G_ADDR_USER":"http://blog.dooioo.com","g_addr_guanggao":"http://guanggao.dooioo.com","G_API_ESTATE_BIGPIC":"http://loupan.dooioo.com/api/estate/#estateId#/roomlayoutPicture/#propertyId#","g_addr_wzt":"http://guanggao.dooioo.com","g_addr_empdetail":"http://gzz.dooioo.com","g_api_queryhouselayoutpicbypropertyid":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPic/#propertyId#","G_GA_FANGYUAN":"fangyuan","g_api_addemprole":"http://renzi.dooioo.com/oms/api/addEmpRole/#userCode#/#roleId#?token=d59129a71aa1d3a65a8f58809cdc2191","g_addr_datacenter":"http://data.dooioo.com","G_API_NOTICELIMITENTRUSTTOBILLSYSTEM":"http://feiyong.dooioo.com/api/getSignRepay?estateNo=#estateNo#&signStatus=#signStatus#&signTime=#signTime#&orgId=#orgId#&empNo=#empNo#&limitId=#limitId#&limitTransferFlag=#limitTransferFlag#&isNoReceivePay=#isNoReceivePay#","g_api_sendMsgToStaff":"http://duanxin.dooioo.com/api/tools/sendMsg","g_api_deleteemprole":"http://renzi.dooioo.com/oms/api/removeRoleForFY/#userCode#?token=d59129a71aa1d3a65a8f58809cdc2191","g_addr_report":"http://data.dooioo.com","g_api_querycertificatedlayoutpic":"http://loupan.dooioo.com/api/estate/queryCertificatedLayoutPic/#propertyId#","G_ADDR_ESTATE":"http://loupan.dooioo.com","G_API_RECORDAPPLY":"http://beian.dooioo.com/store/beian/query","g_api_propertySyncPic":"http://192.168.0.234:8080/api/property/syncPic?path=#path#","g_addr_fy":"http://fy.dooioo.com","G_API_ADDEMPROLE":"http://renzi.dooioo.com/oms/api/addEmpRole/#userCode#/#roleId#?token=d59129a71aa1d3a65a8f58809cdc2191","g_api_workspace":"http://gzz.dooioo.com","g_ga_fangyuan":"fangyuan","G_ADDR_DATACENTER":"http://data.dooioo.com","G_API_SAVEHOUSELAYOUTPIC2ESTATE":"http://loupan.dooioo.com/api/estate/#estateId#/insertLayoutPic/#propertyId#","G_API_INQUIRY_CALLBACK":"http://ky.dooioo.com/api/inquiry/watchProperty/#watchPropertyId#/updateCallFlag","G_ADDR_HEADPIC":"http://fs.dooioo.com/fetch/vp/touxiang","G_API_UPDATEESTATECOMPLETEYEAR":"http://loupan.dooioo.com/api/estate/#estateId#/updateCompletionDate","G_ADDR_HELP":"http://bangzhu.dooioo.com","G_ADDR_KEYBOX":"http://keybox.dooioo.com","g_api_queryHouseLayoutPicByRoom":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByRoom?room=#room#","g_addr_net":"http://www.dooioo.com","G_API_SYNCGENERATEPICS":"http://loupan.dooioo.com/api/estate/syncGeneratePics","g_api_omsJpFlatsApply":"http://gongyu.dooioo.com/flats/new/?estateName=#estateName#&estateAddress=#estateAddress#&estateBuilding=#estateBuilding#&estateRoom=#estateRoom#&houseNo=#houseNo#","g_api_omsEmployeesByPhones":"http://renzi.dooioo.com/oms/api/findEmployeesByPhones?phones=#phones#","G_ADDR_KY":"http://ky.dooioo.com","g_addr_ws":"ws://fy.dooioo.com","g_addr_empDetail":"http://gzz.dooioo.com","G_ADDR_GUANGGAO":"http://guanggao.dooioo.com","G_ADDR_OMS":"http://renzi.dooioo.com","G_ADDR_REPORT":"http://data.dooioo.com","g_api_updateEstateFloorAll":"http://loupan.dooioo.com/api/estate/#estateId#/updateFloorAll","G_ADDR_SMS":"http://duanxin.dooioo.com","g_addr_help":"http://bangzhu.dooioo.com","g_api_omsjpflatsapply":"http://gongyu.dooioo.com/flats/new/?estateName=#estateName#&estateAddress=#estateAddress#&estateBuilding=#estateBuilding#&estateRoom=#estateRoom#&houseNo=#houseNo#","g_api_totalmessageurl":"http://xiaoxi.dooioo.com/message/save","G_API_DELETEEMPROLE":"http://renzi.dooioo.com/oms/api/removeRoleForFY/#userCode#?token=d59129a71aa1d3a65a8f58809cdc2191","g_addr_user_auth":"http://login.dooioo.com","g_api_deleteEmpRole":"http://renzi.dooioo.com/oms/api/removeRoleForFY/#userCode#?token=d59129a71aa1d3a65a8f58809cdc2191","g_addr_estate":"http://loupan.dooioo.com","g_api_updateEstateCompleteYear":"http://loupan.dooioo.com/api/estate/#estateId#/updateCompletionDate","pic_root":"http://fs.dooioo.com/fetch/vp/fy/gi/","g_addr_ws_import":"ws://local.dooioo.com:8083","g_api_saveHouseLayoutPic2Estate":"http://loupan.dooioo.com/api/estate/#estateId#/insertLayoutPic/#propertyId#","G_API_QUERYCERTIFICATEDLAYOUTPIC":"http://loupan.dooioo.com/api/estate/queryCertificatedLayoutPic/#propertyId#","G_API_GONGYU":"http://gongyu.dooioo.com","g_addr_user":"http://blog.dooioo.com","g_api_estate_bigpic":"http://loupan.dooioo.com/api/estate/#estateId#/roomlayoutPicture/#propertyId#","G_API_OMSEMPLOYEESBYPHONES":"http://renzi.dooioo.com/oms/api/findEmployeesByPhones?phones=#phones#","G_ADDR_EMPDETAIL":"http://gzz.dooioo.com","G_API_WORKSPACE":"http://gzz.dooioo.com","g_api_noticeLimitEntrustToBillSystem":"http://feiyong.dooioo.com/api/getSignRepay?estateNo=#estateNo#&signStatus=#signStatus#&signTime=#signTime#&orgId=#orgId#&empNo=#empNo#&limitId=#limitId#&limitTransferFlag=#limitTransferFlag#&isNoReceivePay=#isNoReceivePay#","g_api_savehouselayoutpic2estate":"http://loupan.dooioo.com/api/estate/#estateId#/insertLayoutPic/#propertyId#","g_api_queryPhoneNumberArea":"http://duanxin.dooioo.com/sms/api/phoneArea?phone=#phoneNumber#","G_API_QUERYHOUSELAYOUTPICBYPROPERTYID":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPic/#propertyId#","G_API_TOTALMESSAGEURL":"http://xiaoxi.dooioo.com/message/save","g_api_querylayoutpicbybuildingandroom":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByBuildingAndRoom","g_api_queryHouseLayoutPicByPropertyId":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPic/#propertyId#","g_api_recordApply":"http://beian.dooioo.com/store/beian/query","g_addr_dituzhaofang":"http://dtzf.dooioo.com","g_api_gongyu":"http://gongyu.dooioo.com","G_API_INITSENDSMSFLAG":"http://duanxin.dooioo.com/sms/api/pushPropertyMq","G_ADDR_NET":"http://www.dooioo.com","g_api_syncGeneratePics":"http://loupan.dooioo.com/api/estate/syncGeneratePics","g_api_initSendSmsFlag":"http://duanxin.dooioo.com/sms/api/pushPropertyMq","g_api_sendmsgtostaff":"http://duanxin.dooioo.com/api/tools/sendMsg","G_ADDR_ZZJG":"http://zzjg.dooioo.com","g_api_recordapply":"http://beian.dooioo.com/store/beian/query","g_addr_oms":"http://renzi.dooioo.com","g_api_addEmpRole":"http://renzi.dooioo.com/oms/api/addEmpRole/#userCode#/#roleId#?token=d59129a71aa1d3a65a8f58809cdc2191","g_addr_sms":"http://duanxin.dooioo.com","G_API_OMSJPFLATSAPPLY":"http://gongyu.dooioo.com/flats/new/?estateName=#estateName#&estateAddress=#estateAddress#&estateBuilding=#estateBuilding#&estateRoom=#estateRoom#&houseNo=#houseNo#","g_addr_dui":"http://dui.dooioo.com","g_addr_ljk":"http://ljk.dooioo.com","g_addr_record":"http://fs.dooioo.com/fetch/vp/audio","g_addr_keybox":"http://keybox.dooioo.com","g_api_inquiry_callback":"http://ky.dooioo.com/api/inquiry/watchProperty/#watchPropertyId#/updateCallFlag","g_addr_ky":"http://ky.dooioo.com","G_ADDR_FY":"http://fy.dooioo.com","g_api_totalMessageUrl":"http://xiaoxi.dooioo.com/message/save","G_ADDR_RECORD":"http://fs.dooioo.com/fetch/vp/audio","g_api_updateestatefloorall":"http://loupan.dooioo.com/api/estate/#estateId#/updateFloorAll","g_api_omsemployeesbyphones":"http://renzi.dooioo.com/oms/api/findEmployeesByPhones?phones=#phones#","G_ADDR_DITUZHAOFANG":"http://dtzf.dooioo.com","g_api_queryhouselayoutpicbyroom":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByRoom?room=#room#","g_api_updateestatecompleteyear":"http://loupan.dooioo.com/api/estate/#estateId#/updateCompletionDate","G_API_QUERYHOUSELAYOUTPICBYROOM":"http://loupan.dooioo.com/api/estate/#estateId#/queryLayoutPicByRoom?room=#room#"});
+        ResourceMap.version = 20150318;
+
+    </script>
+</head>
+
+<body>
+<!-- <div id="_header_show_msg" style="border-bottom:1px solid #ffdaa6;background:#fef9e4;color:red;padding:10px 0 8px 0;text-align:center;font-size:14px;margin-top:-10px"></div>
+ -->
+<div id="new_header"></div>
+
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/jquery.json-2.2.min.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/fns.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/header.js?v=20150318"></script>
+<!-- openhouse使用 -->
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/validation.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/plugs/jquery.audioplayer.js?v=20150318"></script>
+
+<script type="text/javascript" src="/static/js/dui_portal.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/directive.js?v=20150318"></script>
+<script type="text/javascript" src="/static/js/fy/_header.js?v=20150318"></script>
+
+
+<div class="container" ng-controller="HouseListController" ng-cloak>
+
+    <pre style="display :none">{{params | json}} {{helper | json}}</pre>
+
+    <!-- 房源类型 -->
+    <table width="100%" cellpadding="0" cellspacing="0" class="navTab1th">
+        <tbody>
+        <tr align="center">
+            <td width="9%" ng-class="{current: params.type == 'sale'}" ng-click="changeTab('sale')"><a href="javascript:;">出售</a></td>
+            <td width="9%" ng-class="{current: params.type == 'rent'}" ng-click="changeTab('rent')"><a href="javascript:;">出租</a></td>
+            <td width="9%"
+                ng-class="{current: params.type == 'waitToExploit' || params.type == 'waitSale' || params.type == 'waitRent' || params.type == 'saled' || params.type == 'rented' || params.type == 'myrented' || params.type == 'unknown'  }"
+                ng-click="changeTab('waitToExploit')"><a href="javascript:;">待开发</a></td>
+            <td width="9%" ng-class="{current: params.type == 'booking' || params.type == 'booking_booking' || params.type == 'booking_mysaled'}" ng-click="changeTab('booking')" ng-show="model.authForBooking"><a href="javascript:;">预定</a></td>
+            <td width="9%"
+                ng-class="{current: params.type == 'all' || params.type == 'invalid' || params.type == 'system'}"
+                ng-click="changeTab('all')"><a href="javascript:;">全部</a></td>
+            <td width="9%" ng-show="currentUser.isRecommendView" ng-class="{current: params.type == 'recommend'}" ng-click="changeTab('recommend')"><a href="javascript:;">今日扫盘推荐</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 点击搜索条件后 用一个层覆盖搜索条件 不让再点 -->
+    <div ng-show="helper.loading" class="pos_a" style="width:958px; height: 300px;"></div>
+    <!-- 搜索条件 -->
+    <div class="boxWrapBlue mt_10">
+
+        <!-- 关键字搜索区域 -->
+        <div class="clearfix pd_10">
+        <span class="left">
+            <input type="text" estate-autocomp ng-model="helper.backData.keyword" class="txtNew w200" placeholder="试试gjld，北京西路，新里">
+            <div class="autoComplate"></div>
+            <input type="text" building-autocomp ng-model="helper.backData.building" class="txtNew" placeholder="楼栋" style="width:85px">
+            <div class="autoComplate"></div>
+            <input type="text" class="txtNew" ng-model="helper.backData.roomNo" placeholder="室号" style="width:60px">
+            <a href="javascript:;" class="btnOpH24 h24Blue in_block " ng-click="keywordSearch()">搜索</a>
+        </span>
+        <span class="in_block left" note-type="advancelist">
+            <div style="position:relative;" class="in_block">
+                <a class="grey ml_20 mt_5 in_block" href="/house/advancelist">高级搜索</a>
+            </div>
+            <div style="position:relative;" class="in_block">
+                <a class="grey ml_10 mt_5 in_block" target="_blank" href="http://dtzf.dooioo.com">地图找房</a>
+            </div>
+            <div style="position:relative;" class="in_block">
+                <a target="_blank" class="grey ml_10 mt_5 in_block" href="/school/show">重点学校</a>
+            </div>
+            <a class="ml_20 in_block help" href="http://bangzhu.dooioo.com/item/11820" target="_blank" style="margin-top:3px">搜索帮助</a>
+        </span>
+        <span class="right">
+            <a href="http://loupan.dooioo.com/estate/responsible/list" target="_blank" class="btnOpH24 h24Green in_block mr_5 ">主营楼盘</a>
+            <a href="/property/add" target="_blank" class="btnOpH24 h24Green in_block mr_5">添加房源</a>
+        </span>
+        </div>
+
+        <!-- 搜索区域1 -->
+
+        <div class="boxWrapFilter lineH200">
+            <!-- 待开发 -->
+            <p class="grey999" dui-if="params.type =='waitToExploit' || params.type =='waitSale' || params.type =='waitRent' || params.type =='all_booking' || params.type =='wait' || params.type =='rented' || params.type =='saled' || params.type =='unknown' || params.type =='myrented' || params.type =='mysaled'">
+                状态：<search-filter class="lineH200" datasource="dictionary.waitToExploitTypes" selected="params.type" ></search-filter>
+            </p>
+
+            <!-- 全部 -->
+            <p class="grey999" dui-if="params.type =='all' || params.type =='system' || params.type =='invalid' ">
+                状态：<search-filter class="lineH200" datasource="dictionary.allTypes_withBooking" selected="params.type"  dui-if="model.authForBooking"></search-filter><search-filter datasource="dictionary.allTypes_withoutBooking" selected="params.type" dui-if="!model.authForBooking"></search-filter><span class="grey999">|</span><search-filter datasource="dictionary.allTypes_others" selected="params.type" ></search-filter>
+            </p>
+            <!--预定  -->
+            <p class="grey999" dui-if="params.type =='booking' || params.type =='booking_booking' || params.type =='booking_mysaled' ">
+                状态：
+                <search-filter class="lineH200" datasource="dictionary.bookingTypes" selected="params.type" ></search-filter>
+            </p>
+
+            <p class="grey999" dui-if="helper.status == '租'">
+                起租：<search-filter class="lineH200" datasource="dictionary.readyToRents" selected="params.readyToRent" alltext="不限" allvalue=""></search-filter>
+                <span style="margin-left: -7px;"><img src="/static/images/neice.png" width="36" height="12"></span>
+            </p>
+            <p class="grey999" dui-if="helper.status == '租'">
+                看房：<search-filter class="lineH200" datasource="dictionary.lookHouses" selected="params.lookHouse" alltext="不限" allvalue=""></search-filter>
+                <span style="margin-left: -7px;"><img src="/static/images/neice.png" width="36" height="12"></span>
+            </p>
+
+            <p class="grey999">区域：<a href="javascript:;" ng-class="{current: params.district == ''}" ng-click="params.district=''; params.area=''">不限</a>
+                <a href="javascript:;" ng-class="{current: district == params.district}" ng-repeat="district in dictionary.districts" ng-click="loadAreas(district)">{{district}}</a>
+            <div class="landmarks" ng-show="params.district">
+                <search-filter datasource="dictionary.areas" selected="params.area" alltext="不限" allvalue=""></search-filter>
+            </div>
+            </p>
+            <!-- 售价 -->
+            <p class="grey999" dui-if="helper.status != '租'">
+                售价：<search-filter class="lineH200" datasource="dictionary.salePrices" selected="params.price" alltext="不限" allvalue=""></search-filter>
+                <range-search out-params="params" unit="万" low="helper.backData.cpl" high="helper.backData.cph" clear-field="price"></range-search>
+            </p>
+            <!-- 租金 -->
+            <p class="grey999" dui-if="helper.status == '租'">
+                租金：<search-filter class="lineH200" datasource="dictionary.rentPrices" selected="params.price" alltext="不限" allvalue=""></search-filter>
+                <range-search out-params="params" unit="元" low="helper.backData.cpl" high="helper.backData.cph" clear-field="price"></range-search>
+            </p>
+            <p class="grey999">
+                面积：<search-filter class="lineH200" datasource="dictionary.squares" selected="params.square" alltext="不限" allvalue=""></search-filter>
+                <range-search out-params="params" unit="平米" low="helper.backData.csl" high="helper.backData.csh" clear-field="square"></range-search>
+            </p>
+            <p class="grey999">
+                房型：<search-filter class="lineH200" datasource="dictionary.rooms" selected="params.room" alltext="不限" allvalue=""></search-filter>
+            </p>
+            <!--
+            <p class="grey999">
+                类型：<search-filter class="lineH200" datasource="dictionary.usages" selected="params.usage" alltext="不限" allvalue=""></search-filter>
+            </p>
+            -->
+            <p class="grey999" dui-if="helper.status != '租'" >
+                学区：<a href="javascript:;" ng-class="{current: params.schoolType == ''}" ng-click="params.schoolType=''">不限</a>
+                <a href="javascript:;" ng-class="{current: params.schoolType == '区重点幼儿园'}" ng-click="params.schoolType = '区重点幼儿园'; params.style = 'rich'">一级幼儿园</a>
+                <a href="javascript:;" ng-class="{current: params.schoolType == '市重点幼儿园'}" ng-click="params.schoolType = '市重点幼儿园'; params.style = 'rich'">市示范幼儿园</a>
+                <a href="javascript:;" ng-class="{current: params.schoolType == '区重点小学'}" ng-click="params.schoolType = '区重点小学'; params.style = 'rich'">区重点小学</a>
+                <a href="javascript:;" ng-class="{current: params.schoolType == '市重点小学'}" ng-click="params.schoolType = '市重点小学'; params.style = 'rich'">市重点小学</a>
+
+
+            </p>
+
+            <p class="grey999" dui-if="helper.status != '售' " >地铁：<a href="javascript:;" ng-class="{current: params.subwayLine == ''}" ng-click="params.subwayLine=''; params.subwayStop=''">不限</a>
+                <a href="javascript:;" ng-class="{current: subwayLine == params.subwayLine}" ng-repeat="subwayLine in dictionary.subwayLines" ng-click="loadSubwayStop(subwayLine)">{{subwayLine}}</a>
+            <div class="landmarks" ng-show="params.subwayLine">
+                <search-filter datasource="dictionary.subwayStopList" selected="params.subwayStop" alltext="不限" allvalue=""></search-filter>
+            </div>
+            </p>
+            <p class="grey999" ng-show="params.subwayLine !=''">
+                距离：<search-filter class="lineH200" datasource="dictionary.distances" selected="params.subwayDistance" alltext="不限" allvalue=""></search-filter>
+            </p>
+
+
+        </div>
+
+        <!-- 搜索区域2 -->
+        <div class="boxWrapFilter2 lineH200">
+
+            <div>
+                <!--
+                        <span class="grey999">楼层：</span><range-search out-params="params" low="helper.backData.fll" high="helper.backData.flh" ></range-search>
+
+                        <span class="grey999" style="margin-left: 5px;">房龄：</span>
+                        <select ng-model="params.fyAge" ng-options="item.value as item.text for item in dictionary.fyAges">
+                            <option value="">不限</option>
+                        </select>
+                         -->
+                <span class="grey999">筛选：</span>
+                <!-- 房屋类型 -->
+                <search-condition datasource="dictionary.usages"
+                                  checked-value="params.usage" default-value="房屋类型" direction="right" style="margin-right:10px;">
+                </search-condition>
+                <!-- 建造年代 -->
+                <search-condition datasource="dictionary.fyAges"
+                                  checked-value="params.fyAge" default-value="建造年代" direction="right" style="margin-right:10px;">
+                </search-condition>
+                <!--楼层 -->
+                <dui-range-select start-range="dictionary.startRange" start="params.fll" end="params.flh" width="120"
+                                  compute-end-range="computeEndRange(startItem)" format-item="formatVal(item)">
+                </dui-range-select>
+
+                <!-- 我的相关 -->
+                <search-condition datasource="dictionary.myRelations"
+                                  checked-value="params.myRelation" default-value="我的相关" status-type="{{params.type}}" direction="right" style="margin-right:10px;margin-left:10px;">
+                </search-condition>
+                <!-- 权益 -->
+                <search-condition datasource="dictionary.benefitTypes"
+                                  checked-value="helper.benefitType" default-value="权益" direction="right" style="margin-right:10px;">
+                </search-condition>
+                <!--
+                <span class="grey999" style="margin-left: 5px;">上架：</span>
+                <input type="text" class="txtDate" date-picker ng-model="$parent.params.trustDateLow" readonly> -
+                <input type="text" class="txtDate " date-picker ng-model="$parent.params.trustDateHigh" readonly>
+
+                <span class="grey999" style="margin-left: 5px;">跟进：</span>
+                <input type="text" class="txtDate" date-picker ng-model="$parent.params.followDateLow" readonly> -
+                <input type="text" class="txtDate " date-picker ng-model="$parent.params.followDateHigh" readonly>
+                 -->
+                <!--
+               <span class="grey999" style="margin-left: 5px;">权益：</span>
+               <select style="width:65px;" ng-model="helper.benefitType" ng-options="emp.value as emp.text for emp in dictionary.benefitTypes"></select>
+                -->
+                <!--  -->
+ 			<span dui-if="helper.benefitType">
+	            <span class="grey999" style="margin-left: 5px;">归属方：</span>
+	            <duitree datasource-type="front" selected-data="helper.selectedData" contain-employee="true"
+                         checkable-type="all" tree-type="popup" single-datasource="true" can-reset="true" quick-pick="true"
+                         select="selectCallback(selectedNodeData)"
+                         unselect-callback="unselect(selectedNodeData)" width="60" searchable="true"
+                         quick-pick-callback="quickPick(qType)" style="display: inline-block;width: 80px">
+                </duitree>
+            </span>
+            </div>
+            <div class="clearfix" style="padding-top:8px;">
+                <p checkboxcontainer wait-data-ready="true" ng-model="params.filter" class="left">
+                    <span class="grey999">其它：</span>
+                    <label ng-repeat="item in dictionary.filters" ng-hide="hideFilterItem(item) ">
+                        <input type="checkbox" class="js_checkbox"  value="{{item.value}}"><span ng-class="{red:item.value == 't'}">{{item.text}}</span>
+                    </label>
+                </p>
+                <div style="position:relative;" class="in_block ml_10 left">
+                    <a href="http://www.dooioo.com/broker/110863" target="_blank">我的外网</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除选项列表   开始-->
+    <div class="filterNow clearfix mt_5">
+        <filter-del params="params" field-name="type" dictionary="dictionary.types" prefix="状态："></filter-del>
+
+        <filter-del params="params" field-name="keyword" prefix="搜索："></filter-del>
+        <filter-del params="params" field-name="building"></filter-del>
+        <filter-del params="params" field-name="roomNo"></filter-del>
+
+        <filter-del params="params" field-name="district"></filter-del>
+        <filter-del params="params" field-name="area"></filter-del>
+
+        <span dui-if="helper.status != '租'"><filter-del params="params" dictionary="dictionary.salePrices" field-name="price"></filter-del></span>
+        <span dui-if="helper.status == '租'"><filter-del params="params" dictionary="dictionary.rentPrices" field-name="price"></filter-del></span>
+
+        <range-filter-del params="params" low-field-name="cpl" high-field-name="cph" suffix="{{helper.status == '租' && '元' || '万'}}" reset-field="price"></range-filter-del>
+        <range-filter-del params="params" low-field-name="csl" high-field-name="csh" suffix="平米" reset-field="square"></range-filter-del>
+
+        <filter-del params="params" dictionary="dictionary.readyToRents" field-name="readyToRent" prefix="起租："></filter-del>
+        <filter-del params="params" dictionary="dictionary.lookHouses" field-name="lookHouse" prefix="看房："></filter-del>
+
+        <filter-del params="params" dictionary="dictionary.squares" field-name="square"></filter-del>
+        <filter-del params="params" dictionary="dictionary.rooms" field-name="room"></filter-del>
+        <filter-del params="params" dictionary="dictionary.usages" field-name="usage"></filter-del>
+        <filter-del params="params" dictionary="dictionary.shoolType" field-name="schoolType"></filter-del>
+        <filter-del params="params" dictionary="dictionary.myRelations" field-name="myRelation"></filter-del>
+        <filter-del params="helper" dictionary="dictionary.benefitTypes" field-name="benefitType"></filter-del>
+        <filter-del params="params"  field-name="subwayLine"></filter-del>
+        <filter-del params="params"  field-name="subwayStop"></filter-del>
+        <filter-del params="params" dictionary="dictionary.distances" field-name="subwayDistance"></filter-del>
+        <!-- 复选框的filters -->
+        <div class="filter mb_5" ng-repeat="f in params.filter">
+            <span class="left pt_2">{{helper.getTextByValue(f, dictionary.filters)}}</span>
+            <a href="javascript:;" class="filterCkDel" ng-click="params.filter.splice($index, 1)"></a>
+        </div>
+
+        <range-filter-del params="params" low-field-name="fll" high-field-name="flh" suffix="层"></range-filter-del>
+        <filter-del params="params" dictionary="dictionary.fyAges" field-name="fyAge"></filter-del>
+        <filter-del params="params" field-name="trustDateLow" prefix="委托起始日："></filter-del>
+        <filter-del params="params" field-name="trustDateHigh" prefix="委托结束日："></filter-del>
+        <filter-del params="params" field-name="followDateLow" prefix="跟进起始日："></filter-del>
+        <filter-del params="params" field-name="followDateHigh" prefix="跟进结束日："></filter-del>
+
+        <div class="filter mb_5" dui-if="model.otherProperty">
+            <span class="left pt_2"><a href="/property/{{model.otherProperty.propertyId}}">{{model.otherProperty.fullName}}</a>&nbsp;&nbsp;&nbsp;业主的其他房源</span>
+            <a href="javascript:;" class="filterCkDel" ng-click="params.propertyNo='';"></a>
+        </div>
+
+        <a href="javascript:;" class="in_block ml_20 mt_2" ng-click="clearParams()">清空</a>
+    </div>
+
+    <!-- 删除选项列表   结束-->
+
+
+    <div class="clearfix">
+        <div class="left mt_5">
+            <span class="in_block" style="height:20px; line-height: 20px;"><b class="green">{{model.paginate.totalCount}}</b> 套符合要求的房子　　排序：</span>
+
+            <span class="feature {{(params.sortField == 'rentDKDesc' || params.sortField == 'dkDesc') && 'f_bg_red' || 'f_bg_grey'}} hand in_block" ng-click="decideAndChgDkType(params.type);">带看量<span class="in_block" style="height:18px; line-height: 18px;">↓</span></span>
+
+            <span class="feature {{params.sortField == 'pageViewCountDesc' && 'f_bg_red' || 'f_bg_grey'}} hand in_block ml_5" ng-click="params.sortField='pageViewCountDesc';">浏览量 <span class="in_block" style="height:18px; line-height: 18px;">↓</span></span>
+            <span class="feature {{params.sortField == 'attentionCountDesc' && 'f_bg_red' || 'f_bg_grey'}} hand in_block ml_5" ng-click="params.sortField='attentionCountDesc';">关注量 <span class="in_block" style="height:18px; line-height: 18px;">↓</span></span>
+
+            <span  dui-if="params.type =='sale' || params.type =='all' " class="feature {{params.sortField == 'priceDownTimeDesc' && 'f_bg_red' || 'f_bg_grey'}} hand in_block ml_5" ng-click = "params.sortField='priceDownTimeDesc';">最新降价 <span class="in_block" style="height:18px; line-height: 18px;">↓</span></span>
+
+            <span  dui-if="params.type =='rent' " class="feature {{params.sortField == 'rentPriceDownTimeDesc' && 'f_bg_red' || 'f_bg_grey'}} hand in_block ml_5" ng-click = "params.sortField='rentPriceDownTimeDesc';">最新降价 <span class="in_block" style="height:18px; line-height: 18px;">↓</span></span>
+
+
+        </div>
+
+        <div dui-if="model.paginate.totalCount > 0">
+            <simple-pagination class="right" total-page="model.paginate.totalPage" current-page="params.pageNo"></simple-pagination>
+        </div>
+
+        <div class="right mr_20 mt_5">
+            <a href="javascript:;" ng-click="params.style='simple';params.pageNo=1;" ng-show="params.style == 'rich'">看列表</a>
+            <a href="javascript:;" ng-click="params.style='rich';params.pageNo=1;" ng-show="(params.style == 'simple' || !params.style) && model.sendSMSFlag != 1 && model.kyMatchPropertyFlag != 1  ">看大图</a>
+        </div>
+
+    </div>
+    <!--<ng-include src="helper.listTpl"></ng-include>-->
+
+    <div class="center pos_a" style="left: 50%; top: 70%" ng-show="helper.loading"><img src="http://dui.dooioo.com/public/images/icon_ajaxload.gif"/></div>
+
+    <div dui-if="params.style != 'rich'">
+        <div class="mt_10">
+            <table width="100%" cellspacing="0" class="tableListNew tableNarrow searchListTb">
+                <tbody>
+                <tr class="trHead" id="fixedHead" dui-if="params.type == 'all' && helper.status == '租' ">
+                    <td width="340">名称 <a href="javascript:;" class="listOrder {{getSortClass('roomNo')}}" ng-click="sortBy('roomNoDesc');">按室号排序</a></td>
+                    <td width="60" >类型</td>
+                    <td width="120">区域-板块</td>
+                    <td width="60" style="text-align: right;">房型</td>
+                    <td width="90" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('square')}}" ng-click="sortBy('squareDesc');" >面积</a></td>
+                    <!--  td width="80" ng-show="helper.status != '租'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('totalPrice')}}" ng-click="sortBy('totalPriceDesc');" >售价</a></td -->
+                    <td width="90" ng-show="helper.status == '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('unitPrice')}}" ng-click="sortBy('unitPriceDesc');" >单价</a></td>
+                    <td width="90" ng-show="helper.status != '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('rentPrice')}}" ng-click="sortBy('rentPriceDesc');" >租金</a></td>
+                    <td width="60" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('trustDate')}}" ng-click="sortBy('trustDateDesc');" >上架</a></td>
+                    <td width="80" style="text-align: right;">
+                        <a ng-show="params.type == 'rent'" href="javascript:;" class="listOrder {{getSortClass('rentDK')}}" ng-click="sortBy('rentDKDesc');" >租赁带看</a>
+                        <a ng-show="params.type != 'rent'" href="javascript:;" class="listOrder {{getSortClass('dk')}}" ng-click="sortBy('dkDesc');"  >二手带看</a>
+                    </td>
+                    <td width="60" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('followDate')}}" ng-click="sortBy('followDateDesc');" >跟进</a></td>
+                </tr>
+
+                <tr class="trHead" id="fixedHead" dui-if="params.type == 'all' && helper.status != '租' ">
+                    <td width="320">名称 <a href="javascript:;" class="listOrder {{getSortClass('roomNo')}}" ng-click="sortBy('roomNoDesc');">按室号排序</a></td>
+                    <td width="60" >类型</td>
+                    <td width="90">区域-板块</td>
+                    <td width="35" style="text-align: right;">房型</td>
+                    <td width="60" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('square')}}" ng-click="sortBy('squareDesc');" >面积</a></td>
+                    <td width="65"  style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('totalPrice')}}" ng-click="sortBy('totalPriceDesc');" >售价</a></td>
+                    <td width="60" ng-show="helper.status == '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('unitPrice')}}" ng-click="sortBy('unitPriceDesc');" >单价</a></td>
+                    <td width="60" ng-show="helper.status != '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('rentPrice')}}" ng-click="sortBy('rentPriceDesc');" >租金</a></td>
+                    <td width="50" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('trustDate')}}" ng-click="sortBy('trustDateDesc');" >上架</a></td>
+                    <td width="70" style="text-align: right;">
+                        <a ng-show="params.type == 'rent'" href="javascript:;" class="listOrder {{getSortClass('rentDK')}}" ng-click="sortBy('rentDKDesc');" >租赁带看</a>
+                        <a ng-show="params.type != 'rent'" href="javascript:;" class="listOrder {{getSortClass('dk')}}" ng-click="sortBy('dkDesc');"  >二手带看</a>
+                    </td>
+                    <td width="50" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('followDate')}}" ng-click="sortBy('followDateDesc');" >跟进</a></td>
+                </tr>
+
+                <tr class="trHead" id="fixedHead" dui-if="params.type != 'all' && helper.status == '租'">
+                    <td width="358">名称 <a href="javascript:;" class="listOrder {{getSortClass('roomNo')}}" ng-click="sortBy('roomNoDesc');">按室号排序</a></td>
+                    <td width="120">区域-板块</td>
+                    <td width="60" style="text-align: right;">房型</td>
+                    <td width="90" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('square')}}" ng-click="sortBy('squareDesc');" >面积</a></td>
+
+                    <td width="90" ng-show="helper.status == '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('unitPrice')}}" ng-click="sortBy('unitPriceDesc');" >单价</a></td>
+                    <td width="90" ng-show="helper.status != '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('rentPrice')}}" ng-click="sortBy('rentPriceDesc');" >租金</a></td>
+                    <td width="90"  style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('readyToRent')}}" ng-click="sortBy('readyToRentDesc');" >起租日</a></td>
+                    <td width="80" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('trustDate')}}" ng-click="sortBy('trustDateDesc');" >上架</a></td>
+                    <td width="80" style="text-align: right;">
+                        <a ng-show="params.type == 'rent'" href="javascript:;" class="listOrder {{getSortClass('rentDK')}}" ng-click="sortBy('rentDKDesc');" >租赁带看</a>
+                        <a ng-show="params.type != 'rent'" href="javascript:;" class="listOrder {{getSortClass('dk')}}" ng-click="sortBy('dkDesc');"  >二手带看</a>
+                    </td>
+                    <td width="80" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('followDate')}}" ng-click="sortBy('followDateDesc');" >跟进</a></td>
+                </tr>
+
+                <tr class="trHead" id="fixedHead" dui-if="params.type != 'all' && helper.status != '租'">
+                    <td width="338">名称 <a href="javascript:;" class="listOrder {{getSortClass('roomNo')}}" ng-click="sortBy('roomNoDesc');">按室号排序</a></td>
+                    <td width="120">区域-板块</td>
+                    <td width="60" style="text-align: right;">房型</td>
+                    <td width="80" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('square')}}" ng-click="sortBy('squareDesc');" >面积</a></td>
+                    <td width="80"  style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('totalPrice')}}" ng-click="sortBy('totalPriceDesc');" >售价</a></td>
+                    <td width="80" ng-show="helper.status == '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('unitPrice')}}" ng-click="sortBy('unitPriceDesc');" >单价</a></td>
+                    <td width="80" ng-show="helper.status != '售'" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('rentPrice')}}" ng-click="sortBy('rentPriceDesc');" >租金</a></td>
+                    <td width="60" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('trustDate')}}" ng-click="sortBy('trustDateDesc');" >上架</a></td>
+                    <td width="80" style="text-align: right;">
+                        <a ng-show="params.type == 'rent'" href="javascript:;" class="listOrder {{getSortClass('rentDK')}}" ng-click="sortBy('rentDKDesc');" >租赁带看</a>
+                        <a ng-show="params.type != 'rent'" href="javascript:;" class="listOrder {{getSortClass('dk')}}" ng-click="sortBy('dkDesc');"  >二手带看</a>
+                    </td>
+                    <td width="60" style="text-align: right;"><a href="javascript:;" class="listOrder {{getSortClass('followDate')}}" ng-click="sortBy('followDateDesc');" >跟进</a></td>
+                </tr>
+
+
+                <tr ng-repeat="item in model.paginate.pageList" ng-class="{focusRow: item.propertyNo == helper.selectedNo}" ng-init="isSystemProperty = (item.status =='系统盘' && item.empNo == '80001') ">
+                    <td>
+                        <span class="legendImg l_key in_block " ng-show='item.propertyLook == "随时可看（有钥匙）"' style="float: none;margin-left: -20px;padding-right: 5px;"></span>
+
+                        <!-- ng-model为true时 就会选中复选框 -->
+                        <input type="checkbox" name="selectRow"   ng-model='item.isChecked'
+                               dui-if="model.sendSMSFlag == 1" ng-click="selectRowClick(item)" >
+
+                        <input type="checkbox" name="selectRow"   ng-model='item.isChecked'
+                               dui-if="model.kyMatchPropertyFlag == 1" ng-click="selectRowClick(item) ">
+                		  
+                <span dui-if="item.canViewProperty">
+                <!-- /property/{{item.propertyId}} -->
+                    <a href="/property/{{item.propertyId}}?timeToken={{timeToken}}" class="{{getPropertyNameClass(params.type,item.status)}} bold" ng-click="jumpTrackUrl($event, item.propertyId,item.propertyNo);">{{item.estateName}} - {{item.building}} - {{item.roomNo}}</a>
+                </span>
+                <span dui-if="!item.canViewProperty">
+                    {{item.estateName}} -  -
+                </span>
+
+                        <span class="deep_orange pl_5" ng-show="item.jpsCreatedAt || item.jpzCreatedAt">精</span>
+                        <span class="deep_green pl_5" ng-show="item.hasHDPicture == 1">高清</span>
+                        <span class="deep_green pl_5" ng-show="item.imageUrl && item.imageUrl != '/'">图</span>
+                        <span class="deep_green pl_5" ng-show="item.openHouseIsHot">OH</span>
+                        <span class="deep_orange pl_5" ng-show="item.limitSellEntrustCheckStatus == '1' || item.limitSellEntrustCheckStatus == '2'">签赔</span>
+                        <span class="deep_orange pl_5" ng-show="item.jpFlatsCreatedAt">管家房</span>
+                        <span class="orgF90 pl_5" ng-show="item.auctionEmpNo">拍</span>
+                        <span class="orgF90 pl_5" ng-show="item.isSchoolProperty">学 </span>
+                        <p class="mt_5" style="margin-left: -5px;" ng-show="item.viewSaleStartHandle || item.viewRentStartHandle ">
+                            <span class="clearfix" ><span class="protect_L">&nbsp;</span><span class="protect_R"><b>{{formatDate(item.countStartHandleAt)}}</b>（还剩{{item.protectionOverage}}）</span></span>
+                        </p>
+                    </td>
+                    <td dui-if="params.type == 'all'">{{item.status}}</td>
+                    <td>
+                        {{item.districtName}} - {{item.areaName}}
+                    </td>
+                    <td style="text-align: right;">
+                        <span dui-if="isSystemProperty"> -</span>
+                        <span dui-if="!isSystemProperty"> {{item.countF}}/{{item.countT}}/{{item.countW}}</span>
+
+                    </td>
+                    <td style="text-align: right;">
+                        <span dui-if="isSystemProperty"> -</span>
+                        <span dui-if="!isSystemProperty"> {{item.square}}</span>
+                    </td>
+                    <td ng-show="helper.status != '租'" style="text-align: right;">
+                        <span dui-if="isSystemProperty"> -</span>
+                        <!-- 处理系统盘的情况，以及到手价和各付价的情况-->
+                        <span dui-if="!isSystemProperty && item.price.toFixed(0) == 0 && item.handPrice.toFixed(0) == 0">-<span style="margin-left: 10px;"></span></span>
+
+                        <span dui-if="!isSystemProperty && item.price.toFixed(0) == 0  && item.handPrice.toFixed(0) != 0">{{item.handPrice.toFixed(0)}}<span ><img src="/static/images/dao.png" width="10" height="10" /></span></span>
+
+                        <span dui-if="!isSystemProperty && item.price.toFixed(0) != 0"> {{item.price.toFixed(0)}}<span style="margin-left: 10px;"></span></span>
+
+
+                    </td>
+                    <td ng-show="helper.status != '售'" style="text-align: right;">
+                        <span dui-if="isSystemProperty"> -</span>
+
+                        <span dui-if="!isSystemProperty"> {{item.rentPrice.toFixed(0)}}</span>
+
+                    </td>
+                    <td ng-show="helper.status == '售'" style="text-align: right;">
+                        <span dui-if="isSystemProperty"> -</span>
+
+                        <span dui-if="!isSystemProperty && item.price.toFixed(0) == 0  ">{{item.handPriceUnit.toFixed(0)}}</span>
+
+                        <span dui-if="!isSystemProperty && item.price.toFixed(0) != 0"> {{item.priceUnit.toFixed(0)}}</span>
+                    </td>
+                    <td ng-show="helper.status == '租'"  style="text-align: right;">
+                        <span dui-if="!item.rentAvailableDate"> -</span>
+                        <span dui-if="item.rentAvailableDate">{{futureDateDiff(item.rentAvailableDate)}}天</span>
+                    </td>
+                    <td style="text-align: right;">
+                        {{dateDiff(item.onlineDate)}}天
+                    </td>
+                    <td ng-show = "params.type == 'rent'" style="text-align: right;">
+                        {{item.rentDk}}
+                    </td>
+                    <td ng-show = "params.type != 'rent'" style="text-align: right;">
+                        {{item.dk}}
+                    </td>
+                    <td style="text-align: right;">
+                        {{dateDiff(item.lastFollowDate)}}天
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div dui-if="params.style == 'rich'">
+        <div class="tabConInfoNew mt_10">
+            <ul class="title clearfix" id="fixedHead">
+                <li class="left ml_5">名称</li>
+                <li class="right clearfix">
+                    <div class="left">排序：</div>
+                    <div class="left mr_10">
+                        <input type="text" name="" id="defaultSort" class="asSelect left" style="border:none" value="{{getSortName(params.sortField)}}" readonly onmouseover="fnShowLayer($(this), $('#defaultSortLayer'), 'left')" onmouseout="$('#defaultSortLayer').hide()" />
+                    </div>
+                    <div id="defaultSortLayer" class="asSelectPop" onmouseover="fnShowLayer($('#defaultSort'), $(this), 'left')" onmouseout="$('#defaultSortLayer').hide()">
+                        <a href="javascript:void(0);" ng-click="richSortBy('onlineDesc');" rel="" ng-class="{current : (params.sortField == null || params.sortField == '')}">默认排序</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('totalPriceDesc');" rel="totalPriceDesc" ng-class="{current : params.sortField == 'totalPriceDesc'}">总价从高到低</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('totalPriceAsc');" rel="totalPriceAsc" ng-class="{current : params.sortField == 'totalPriceAsc'}">总价从低到高</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('squareDesc');" rel="squareDesc" ng-class="{current : params.sortField == 'squareDesc'}">面积从大到小</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('squareAsc');" rel="squareAsc" ng-class="{current : params.sortField == 'squareAsc'} ">面积从小到大</a>
+
+                        <a href="javascript:void(0);" ng-click="richSortBy('unitPriceDesc');" ng-show="param.type == 'sale'" rel="unitPriceDesc" ng-class="{current : params.sortField == 'unitPriceDesc'}">单价从高到低</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('unitPriceAsc');" ng-show="param.type == 'sale'" rel="unitPriceAsc" ng-class="{current : params.sortField == 'unitPriceAsc'}">单价从低到高</a>
+
+                        <a href="javascript:void(0);" ng-click="richSortBy('jpTimeDesc');" ng-show="contains(params.filter, '4')" rel="jpTimeDesc" ng-class="{current : params.sortField == 'jpTimeDesc'}">推荐时间从新到旧</a>
+                        <a href="javascript:void(0);" ng-click="richSortBy('dkDesc');" ng-show="contains(params.filter, '5')" ng-class="{current : params.sortField == 'dkDesc'}">带看从多到少</a>
+
+                        <a href="javascript:void(0);" ng-click="richSortBy('timeDesc');" rel="timeDesc" ng-class="{current : params.sortField == 'timeDesc'}">委托时间从新到旧</a>
+                    </div>
+                    <div class="sortAsNew left">
+                        <a href="javascript:void(0);" ng-click="sortBy('totalPriceDesc');" ng-show="helper.status != '租'" class="listOrder {{getSortClass('totalPrice')}}">各付价</a>
+                        <a href="javascript:void(0);" ng-click="sortBy('unitPriceDesc');" ng-show="helper.status != '租'" class="listOrder {{getSortClass('unitPrice')}}">单价</a>
+                        <a href="javascript:void(0);" ng-click="sortBy('rentPriceDesc');" ng-show="helper.status != '售'" class="listOrder {{getSortClass('rentPrice')}}">租金</a>
+                        <a href="javascript:void(0);" ng-click="sortBy('squareDesc');" class="listOrder {{getSortClass('square')}}">面积</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="contentlists clearfix line pr_20" ng-repeat="item in model.paginate.pageList">
+                <li class="left">
+                    <a href="/property/{{item.propertyId}}" ng-show="item.canViewProperty" ng-click="jumpTrackUrl($event, item.propertyId,item.propertyNo);"><img ng-src="{{ResourceMap.pic_root}}{{item.imageUrl == '/' && 'no.jpg' || item.imageUrl}}_100x75.jpg" /></a>
+                    <a href="javascript:void(0);" ng-show="!item.canViewProperty"><img ng-src="{{ResourceMap.pic_root}}{{item.imageUrl == '/' && 'no.jpg' || item.imageUrl}}_100x75.jpg"/></a>
+                </li>
+                <li class="left" style="width:500px">
+                <span dui-if="item.canViewProperty">
+                    <a href="/property/{{item.propertyId}}" class="bold f14" ng-click="jumpTrackUrl($event, item.propertyId,item.propertyNo);">{{item.estateName}} - {{item.building}} - {{item.roomNo}}</a>
+                </span>
+                <span dui-if="!item.canViewProperty">
+                    {{item.estateName}} -  -
+                </span>
+                    <p class="houseInfo"><span>{{item.countF}}室{{item.countT}}厅</span><span>{{item.square.toFixed(2)}}平米</span><span>单价：{{item.priceUnit.toFixed(0)}}元</span><span ng-show="item.canViewProperty">楼层：{{item.floor}}/{{item.floorAll}}</span><span>装修：{{item.propertyDecoration != '' && item.propertyDecoration || "-"}}</span></p>
+                <span class="grey999">
+                    <span ng-show="item.jpsCreatedAt != null">推荐时间：{{item.jpsCreatedAt | date:'yyyy-MM-dd'}}</span>
+                    <span ng-show="item.jpsCreatedAt == null && item.jpzCreatedAt != null">推荐时间：{{item.jpzCreatedAt | date:'yyyy-MM-dd'}}</span>
+                    <span ng-show="item.dk > 0">7天带看：{{item.dk}}次</span>
+                </span>
+
+                <span ng-show="item.openHouseIsHot">
+                    <span class="green">open house</span> ({{item.openHouseDate}}&nbsp;{{item.openhouseStartTimeDesc}} - {{item.openhouseEndTimeDesc}})
+                </span>
+                </li>
+                <li class="left" style="width:130px">
+                  <span ng-repeat="school in item.schools">
+                   <strong style="font-size:12px"><a target="_blank" href="/school/detail?schoolName={{school.schoolName}}">{{school.schoolName}}</a></strong> <br>
+                    </span>
+                </li>
+
+
+
+
+
+                <li class="left" style="width:70px">
+                    <div ng-repeat="school in item.schools" ng-class="{f_border_org:school.level == '市重点', f_border_green:school.level == '区重点'}" class="feature in_block">
+                        <span dui-if="school.schoolType =='幼儿园'&&school.level=='市重点'">
+                            市示范 <br>
+                        </span>
+                        <span  dui-if="school.schoolType =='幼儿园'&&school.level=='区重点'">
+                            一级 <br>
+                        </span>
+                        <span  dui-if="school.level=='普通'">
+                             <br>
+                        </span>
+                        <span dui-if="school.schoolType !='幼儿园'&&school.level!='普通'">
+                             {{school.level}} <br>
+                        </span>
+                    </div>
+
+                </li>
+                <li class="right" dui-if="params.type == 'sale'">
+                    <!-- 创建人:谢洋 内容:修改价格显示为0的情况 -->
+                    <div>
+                        <strong class="f16">
+                            {{item.price && item.price.toFixed(2) || item.handPrice.toFixed(2)}}万
+                        </strong>
+                    </div>
+                    <div class="fine" ng-show="item.jpsCreatedAt != null"></div>
+                </li>
+
+                <li class="right" dui-if="helper.status == '租'">
+                    <strong class="f16">{{item.rentPrice.toFixed(0)}}元/月</strong>
+                    <div class="fine" ng-show="item.jpzCreatedAt != null"></div>
+                </li>
+
+                <li class="right" dui-if="params.type == 'all'">
+                    <div><strong class="right f14">{{item.price.toFixed(2)}}万</strong></div>
+                    <div><strong class="f14 right">{{item.rentPrice.toFixed(0)}}元/月</strong></div>
+                    <div class="fine" ng-show="item.jpsCreatedAt != null || item.jpzCreatedAt != null"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="search_nothing" dui-if=" model.paginate.totalCount == 0">
+        <input type="hidden" id="js_kyNoMatch" value="no" />
+        <b class="nothing_title f16 grey666">未找到相关房源，原因如下：</b>
+        <div class="bg_eee mt_5 clearfix nothing_content">
+            <div class="leftPart">
+                <b class="org">操作有误</b>
+                <p class="mt_10">
+                    <b>1.</b> 你是否没有在“全部”的分类中查找。<br/>
+                    <b>2.</b> 你输入的文字是否有误。<br />
+                    <b>3.</b> 你可能限制了筛选条件，比如勾选了 “长宁区”，或者勾选了 “精品房源” 等。
+                </p>
+            </div>
+            <div class="rightPart">
+                <b class="org">其他问题</b>
+                <p class="mt_10">
+                    <b>1.</b> 房源被改为系统盘，你可尝试在<a href="http://fy.dooioo.com/house/list?type=system" target="_blank">系统盘</a>搜索。<a href="http://bangzhu.dooioo.com/item/11847" target="_blank">什么情况改为系统盘？</a><br>
+                    <b>2.</b> 此房源现在是预定或者我售状态，只有分行经理可以查看。<br />
+                    <b>3.</b> 老房子调整，比如现在搜徐汇区的新里需要输入“新里”并勾选“徐汇”。
+                </p>
+            </div>
+        </div>
+        <div class="txtRight mt_5"><a href="http://bangzhu.dooioo.com/item/10018/detail" target="blank">了解详情&gt;&gt;</a></div>
+    </div>
+
+    <div ng-show="model.paginate.totalCount > 0">
+        <span class="grey999 left pt_15" style="padding:0px"><b class="red">{{model.paginate.totalCount}}</b>&nbsp;套符合要求的房子</span>
+        <div class="tabConInfoBtm mt_10" style="padding:0px"  paginator display-num="5" record-count="model.paginate.totalCount" page-size="model.paginate.pageSize" current-page="params.pageNo" show-jump="true" ></div>
+    </div>
+
+    <div id="fixedBar" dui-if="model.sendSMSFlag == 1 || model.kyMatchPropertyFlag == 1" >
+        <div class="movingBox" dui-if="model.sendSMSFlag == 1">
+            <div style="width:960px;" class="mh_auto clearfix">
+                <div class="left f12" style="height:32px; line-height:32px;">
+                    <input type="checkbox" name="checkAll" class="ml_5" ng-model="model.isCheckedAll" ng-click="checkAll()">全选
+                    <span class="ml_5 mr_5">|</span>
+                    已选：<b class="mr_5" id="selectedCount">{{model.choicePropertyTotal}}</b>
+                    余额：<b class="red" id="balance">{{model.totalmessage-model.choicePropertyTotal}}</b>
+                </div>
+                <div class="right">
+                    <a href="/house/list/cancelChoice" class="btnOpH34 h34Silver opH34 in_block">取消</a>
+                    <a href="#" class="js_import btnOpH34 h34Blue opH34 in_block js_importCustList ml_15">导入短信发送列表</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="movingBox" dui-if="model.kyMatchPropertyFlag == 1">
+            <div style="width:960px;" class="mh_auto clearfix">
+                <div class="left f12" style="height:32px; line-height:32px;">
+                    <input type="checkbox" name="checkAll" class="ml_5"  ng-model="model.isCheckedAll" ng-click="checkAll()">全选
+                    <span class="ml_5 mr_5">|</span>
+                    已选：<b class="mr_5" id="selectedCount">{{model.choicePropertyTotal}}</b>
+                </div>
+                <div class="right">
+                    <a href="/house/list/cancelChoiceKyMatch?kyredirect={{model.kyredirect}}" class="btnOpH34 h34Silver opH34 in_block">取消</a>
+                    <a id="js_kySubmitMatch" href="#" class="js_import btnOpH34 h34Blue opH34 in_block js_importCustList_kyMatch ml_15">配盘给Ta</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/paginate.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/json/dooioo/dooiooSales.js?v=20150318"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/plugs/jquery-tree-1.0.js?v=20150318"></script>
+
+<script type="text/javascript" src="/front/list/js/service/houselistService.js?v=20150318"></script>
+<script type="text/javascript" src="/front/list/js/directive/houselistDirective.js?v=20150318"></script>
+<script type="text/javascript" src="/front/list/js/controller/HouseListController.js?v=20150318"></script>
+
+
+<!--  
+<script type="text/javascript">
+    $(function(){
+        //页面初始化，读取浏览器缓存 以其中一个为例，一个页面上有多个的话，就封装处理下；
+        var types = ["myExternalHouse"];
+        for(var i in types) {
+            var iKnowStorage = localStorage[types[i] + "_iKnow_tips_" + headerParameters.empNo];//获取缓存中的
+
+            if (!iKnowStorage) {
+                $(".js_messageTips_" + types[i]).show();
+            } else {
+                $(".js_messageTips_" + types[i]).hide();
+            }
+        }
+
+        /***************************************/
+
+        //点击我知道了按钮时 存入浏览器缓存
+        $(".js_IKnow").click(function(){
+            var typeName = $(this).attr("rel");//记录点击的是哪个提示弹层，可能一个页面上有多个tips
+            localStorage[typeName+"_iKnow_tips_"+headerParameters.empNo] = true;
+
+            $(this).closest(".js_messageTips_"+typeName).hide();
+        });
+    });
+</script>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--begin: footer-->
+<div class="footer clearFix">&copy;2011-2015 德佑地产</div>
+<!--end: footer-->
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" id="ip" value="10.8.205.72"/>
+<!-- 弹出层 -->
+<div id="loginLayer" class="popLayer w320">
+    <div class="popTitle clearfix">
+        <h1 style="color:red">系统超时，请重新登录</h1>
+    </div>
+    <div class="popCon" style="margin:0;padding:0;">
+        <div class="form" style="margin: 20px;">
+            <table>
+                <tr>
+                    <td><b>工号:</b><br />
+                        <input type="text" maxlength="6" class="txt tt160" name="empId" id="userId" value="" />
+                    </td>
+                </tr>
+                <tr><td height="10"></td></tr>
+                <tr>
+                    <td>
+                        <div class="clearfix">
+                            <span class="left"><b>密码:</b></span>
+                        </div>
+                        <input type="password" class="txt tt160" name="pwd" id="password" value="" />
+                    </td>
+                </tr>
+                <tr><td height="10"></td></tr>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="popBtn" style="text-align: left;padding-left:22px;">
+        <input type="submit" id="ajaxLogin" value="登录" title="登录" class="btn_login btnForm fBlue60" style="vertical-align:middle;"/>
+            <span>
+                &nbsp;&nbsp;<span id="ajaxErrorMsg" class="red"></span>
+                <b class="green hideit" id="loginig">正在登录中...</b>
+            </span>
+    </div>
+</div>
+<div id="layer_window_alert" class="popLayer w320">
+    <div class="popCon pl_20">
+        <div class="f14 pd_10 mt_10 bold center" id="layer_window_alert_content">
+        </div>
+    </div>
+    <div class="mt_5 t_r pr_15 pb_10 clearfix">
+        <a href="javascript:void(0);" target="blank" class="help_new2 hideit right" id="layer_window_help">了解更多</a>
+    </div>
+    <div class="popBtn"><input type="button" value="我知道了" class="btnForm fBlue60" onclick="close_window_alert();" /></div>
+</div>
+
+
+<div id="layer_risk_warn" class="popLayer w600" style="z-index: 99999">
+    <div class="popTitle clearfix">
+        <h1>警告</h1>
+        <div class="cls"><a href="#" class="xx" onclick="close_window_risk_warn();"></a></div>
+    </div>
+    <div class="popCon pl_20 grey666 lineH200" style="padding-left: 50px;">
+        <div class="pl_20 f14 center mb_10 txtLeft" id="layer_risk_warn_content">
+        </div>
+    </div>
+    <div class="popBtn mt_10">
+        <a href="#" class="btnOpH24 h24Silver in_block" onclick="close_window_risk_warn();">关闭</a>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/WdatePicker.js?v=20150318"></script>
+
+
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/autocomplete.js?v=20150318"></script>
+
+
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/tipsNotice.js?v=20150318"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15293932-21']);
+    _gaq.push(['_setDomainName', 'dooioo.com']);  //自动为二级域名分组，如120.dooioo.com
+    _gaq.push(['_setSiteSpeedSampleRate', 10]);  //为10%的页面访问监控速度
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_setCustomVar', 1, '用户', '吴科(110863)', 1]);
+
+    //消息通知
+    var _tipNotice = new __tipNotice(110863);
+    //是否开启洗盘调查问卷
+    var isOpenQuest = false;
+
+    //数组 转成json格式数据
+    function questTransformData(source, fileldNames){
+        return (source || []).map(function(item){
+            var result = {};
+            for(var i=0, len=fileldNames.length; i<len; i++){
+                result[fileldNames[i]] = item[fileldNames[i]];
+            }
+            return result;
+        });
+    }
+
+    //提示洗盘信息
+    function statusProtectShow(){
+        ajaxGet({
+            url:"/property/statusProtectShow",
+            data:{url:window.location.pathname},
+            cache:false,
+            async:true,
+            ok:function(jsonData){
+                if(jsonData.htmlData != ''){
+                    removePopLayer();
+                    $("body").append(jsonData.htmlData);
+                    ajaxPost({
+                        url:"/property/dealStatusProtect",
+                        cache:false,
+                        async:true,
+                        ok:function(jsonData){
+                            showPopupDiv($('#layer_statShow'));
+                        },
+                        fail:function(){
+                        }
+                    });
+                }
+            },
+            fail:function(){
+                console.log("statusProtectShow fail");
+            }
+        });
+    }
+    $(function(){
+        _tipNotice.run(true);
+
+        //GA统计
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+        //登录绑定
+        $('#ajaxLogin').click(login_post);
+        setTimeout(function(){
+
+            if(isOpenQuest){
+                //提示洗盘调查问卷
+                ajaxGet({
+                    url:"/property/questStatusShow",
+                    data:{url:window.location.pathname},
+                    cache:false,
+                    async:true,
+                    ok:function(jsonData){
+                        if(jsonData.htmlData != ''){
+                            removePopLayer();
+                            $("body").append(jsonData.htmlData);
+                            showPopupDiv($('#layer_questionnaire'));
+                            console.log('questStatusShow ok');
+
+                        }
+                    },
+                    fail:function(){
+                        console.log('questStatusShow fail');
+                        //提示洗盘信息
+                        statusProtectShow();
+                    }
+                });
+            }else{
+                //提示洗盘信息
+                statusProtectShow();
+            }
+
+        },200);
+
+        $("#statShow_Submit").live("click",function(){
+            $("#statShow_Submit").html("数据处理中...");
+            $("#statShow_Submit").unbind("click");
+            window.location.href = window.location.protocol+"//"+window.location.host+"/house/list?type=all";
+        });
+
+        $(".js_quest_result").live("click",function(){
+            //console.log($(this).attr('value'));
+            var propertyNo = $(this).attr('name');
+            $("#message"+propertyNo).html('');
+        });
+
+        $("#quest_Submit").live("click",function(){
+
+            $("#quest_Submit").unbind("click");
+
+            var quest_propertyNos = $("#quest_propertyNos").val().split(',');
+            var postJsonArray =[];
+            //var questValidate = $('#layer_questionnaire').validate({"scroll":false});
+            //if(questValidate.validateForm()){
+            //	console.log("###########################");
+            //}
+
+            var i=0;
+            var postJsonData ="";
+            //校验是否通过
+            var isPass = true;
+            var firstUnPassPropertyNo = null;
+            for (i=0;i<(quest_propertyNos.length-1);i++)
+            {
+                var propertyNo = quest_propertyNos[i];
+                var result = $('input[name="'+propertyNo+'"]:checked').val();
+                if(!result){
+
+                    $("#message"+propertyNo).html('必选');
+                    if(!firstUnPassPropertyNo){
+                        firstUnPassPropertyNo = propertyNo;
+                    }
+
+                    //alert('房源：'+$("a[name='a_questPropDesc"+propertyNo+"'] b").html()+',没有做出选择');
+                    //return ;
+                    isPass = false;
+                }else{
+                    var jsonItem = {'propertyNo':propertyNo,'result':result};
+                    postJsonArray.push(jsonItem);
+                }
+            }
+            if(!isPass){
+                //滚动条滚动
+                $('div[name="quest_scrollDiv"]').animate({scrollTop:$("#message"+firstUnPassPropertyNo).offset().top},1000);
+                return ;
+            }
+            var postJsonData = questTransformData(postJsonArray,['propertyNo', 'result']);
+            ajaxPost({
+                url:"/property/questionnaire/completeQuest",
+                cache:false,
+                async:true,
+                data:{postJsonData:JSON.stringify(postJsonData)},
+                ok:function(jsonData){
+                    hidePopupDiv($('#layer_questionnaire'));
+                    //showPopupDiv($('#layer_statShow'));
+                    //提示洗盘信息
+                    statusProtectShow();
+                },
+                fail:function(){
+                    //提示洗盘信息
+                    statusProtectShow();
+                }
+            });
+
+        });
+    });
+
+</script>
+
+
+<!-- 一定不能有下面这个要不 defaultSortLayer 和 listOrder会被绑定事件 -->
+<!-- jsp:param name="js" value="autocomplete.js"/ -->
+
+
+    
+    

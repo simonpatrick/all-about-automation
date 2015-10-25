@@ -1,0 +1,1369 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>新房频道 - 德佑地产</title>
+    <script>
+        var headerParameters={ empNo:'87544',
+            empName:'崔晶晶',
+            password:'f4cdc27a40ec1c925eaf57c7a1fca50d',
+            env:'integration'};
+    </script>
+    <script type="text/javascript">
+        if (window.location.host.indexOf("dooioo.com")!=-1){  //过滤掉所有非正式环境的访问
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15293932-21']);
+            _gaq.push(['_setDomainName', 'dooioo.com']);  //自动为二级域名分组，如120.dooioo.com
+            _gaq.push(['_setSiteSpeedSampleRate', 10]);  //为10%的页面访问监控速度
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_setCustomVar', 1, '用户', '(87544)', 1]); //获取访客的信息，用户名+工号
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        }
+    </script>
+    <script type="text/javascript">
+        var ubt_js = "<script src='http://logment.dooioo.com/ubt.js' type='text/javascript'><\/script>";
+        document.write(ubt_js);
+    </script>
+
+    <script src="http://dui.dooioo.org/public/js/jkk/clientmonitor.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/main.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/header.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="/static/css/lp.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="/static/css/house.css?v=0320">
+    <link rel="stylesheet" href="http://dui.dooioo.org/public/css/tipsNotice.css?v=0320" type="text/css" />
+    <link href="/static/uploadify/uploadify.css?v=0320" rel="stylesheet" type="text/css" />
+
+
+
+
+    <link type="text/css" rel="stylesheet" href="/static/css/newhouse.css?v=0320">
+
+
+
+    <!-- include css 文件接受 -->
+
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/jquery-1.4.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/fns.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/jquery.json-2.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="/static/js/portal.js?v=0320"></script>
+
+</head>
+
+<body>
+<div id="new_header"></div>
+
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/header.js?v=0320"></script>
+
+
+<wp id="wpSync" rel="87544" encry="f4cdc27a40ec1c925eaf57c7a1fca50d"/>
+<input type="hidden" id="ip" value="10.8.205.72"/>
+<!-- 弹出层 -->
+<div id="loginLayer" class="popLayer w320">
+    <div class="popTitle clearfix">
+        <h1 style="color:red">系统超时，请重新登录</h1>
+    </div>
+    <div class="popCon" style="margin:0;padding:0;">
+        <div class="form" style="margin: 20px;">
+            <table>
+                <tr>
+                    <td><b>工号:</b><br />
+                        <input type="text" maxlength="6" class="txt tt160" name="empId" id="userId" value="" />
+                    </td>
+                </tr>
+                <tr><td height="10"></td></tr>
+                <tr>
+                    <td>
+                        <div class="clearfix">
+                            <span class="left"><b>密码:</b></span>
+                        </div>
+                        <input type="password" class="txt tt160" name="pwd" id="password" value="" />
+                    </td>
+                </tr>
+                <tr><td height="10"></td></tr>
+                <tr>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="popBtn" style="text-align: left;padding-left:22px;">
+        <input type="submit" id="ajaxLogin" value="登录" title="登录" class="btn_login btnForm fBlue60" style="vertical-align:middle;"/>
+		<span>
+			&nbsp;&nbsp;<span id="ajaxErrorMsg" class="red"></span>
+			<b class="green hideit" id="loginig">正在登录中...</b>
+		</span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="clearfix">
+        <h1 class="f18 mt_15">一手</h1>
+
+        <div class="navTabsub mt_15">
+            <a href="/newhouse/list" class="current">新房频道</a>
+
+            <a href="/filing/list">报备及项目管理</a>
+
+
+
+            <a href="/newhouse/contract/list">合同审批</a>
+
+        </div>
+
+        <div class="right">
+            <a class="btnOpH24 h24Silver in_block" href="/newhouse/add">添加项目</a>
+        </div>
+    </div>
+    <div class="boxWrapBlue bd_d2 mt_5">
+        <div class="searchBar">
+            <div class="clearfix">
+                <div class="left">
+                    <input type="text" class="txtNew w300 grey999" autocomplete="off" onblur="showTxtMsg($(this),'小区名字 小区地址 代理专员姓名', 'grey999')" popdiv="estateName_autoComp" ondrop="clearTxtMsg($(this),'小区名字 小区地址 代理专员姓名', 'grey999')" onfocus="clearTxtMsg($(this),'小区名字 小区地址 代理专员姓名', 'grey999')" value="小区名字 小区地址 代理专员姓名" name="keyword" id="keyword" />&nbsp;&nbsp;
+                    <a class="searchBtn searchbtn24 in_block" title="搜一下"></a>
+                </div>
+                <div class="autoComplate" id="estateName_autoComp"></div>
+            </div>
+        </div>
+        <div class="filterBox pd_10">
+            <p>区域：<b class="red in_block">不限</b>
+                <a href="?district=%E9%9D%99%E5%AE%89" class="in_block">静安</a><a href="?district=%E5%BE%90%E6%B1%87" class="in_block">徐汇</a><a href="?district=%E5%8D%A2%E6%B9%BE" class="in_block">卢湾</a><a href="?district=%E9%BB%84%E6%B5%A6" class="in_block">黄浦</a><a href="?district=%E9%95%BF%E5%AE%81" class="in_block">长宁</a><a href="?district=%E6%99%AE%E9%99%80" class="in_block">普陀</a><a href="?district=%E6%B5%A6%E4%B8%9C" class="in_block">浦东</a><a href="?district=%E5%AE%9D%E5%B1%B1" class="in_block">宝山</a><a href="?district=%E9%97%B8%E5%8C%97" class="in_block">闸北</a><a href="?district=%E6%9D%A8%E6%B5%A6" class="in_block">杨浦</a><a href="?district=%E8%99%B9%E5%8F%A3" class="in_block">虹口</a><a href="?district=%E9%97%B5%E8%A1%8C" class="in_block">闵行</a><a href="?district=%E9%87%91%E5%B1%B1" class="in_block">金山</a><a href="?district=%E5%98%89%E5%AE%9A" class="in_block">嘉定</a><a href="?district=%E5%B4%87%E6%98%8E" class="in_block">崇明</a><a href="?district=%E5%A5%89%E8%B4%A4" class="in_block">奉贤</a><a href="?district=%E6%9D%BE%E6%B1%9F" class="in_block">松江</a><a href="?district=%E9%9D%92%E6%B5%A6" class="in_block">青浦</a><a href="?district=%E5%8D%97%E6%B1%87" class="in_block">南汇</a><a href="?district=%E4%B8%8A%E6%B5%B7%E5%91%A8%E8%BE%B9" class="in_block">上海周边</a>
+            </p>
+            <p>类型：<b class="red in_block">不限</b>
+                <a href="?usage=%E4%BD%8F%E5%AE%85" class="in_block">住宅</a><a href="?usage=%E5%88%AB%E5%A2%85" class="in_block">别墅</a><a href="?usage=%E5%86%99%E5%AD%97%E6%A5%BC" class="in_block">写字楼</a><a href="?usage=%E5%95%86%E9%93%BA" class="in_block">商铺</a><a href="?usage=%E5%8E%82%E6%88%BF" class="in_block">厂房</a><a href="?usage=%E5%95%86%E4%BD%8F" class="in_block">商住</a><a href="?usage=%E5%85%B6%E4%BB%96" class="in_block">其他</a></p>
+        </div>
+        <div class="filterBox2">筛选：
+            <label for="filtChk0"  class="bold red" ><input type="checkbox" name="projectStatus" id="filtChk0" value="1"   checked="true" >代理中</label>
+            <label for="filtChk1" ><input type="checkbox" name="projectStatus" id="filtChk1" value="2"  >代理结束</label>
+
+            <label for="filtChk2" ><input type="checkbox" name="projectStatus" id="filtChk2" value="3"  >待审</label>
+
+
+
+            <label for="filtChk4" ><input type="checkbox" name="projectStatus" id="filtChk4" value="5"  >审批打回</label>
+
+
+            <!-- 总监能查看未盖章或已盖章项目 -->
+
+
+            <span class="ml_5 mr_5 grey999">|</span>
+            <label ><input type="checkbox" name="currentEmpNo" id="currentEmpNo" value="87544"  >我代理的项目</label>
+            <label for="filtChk5" class="" >
+                <input type="checkbox" name="status" id="filtChk5" value="1"  />已作废
+            </label>
+
+        </div>
+    </div>
+    <div class="filterNow mt_5">
+
+        <span class="left pt_2">当前找房条件：</span>
+
+
+
+
+        <div class="filter"><span class="left pt_2">代理中</span><a href="javascript:void(0);" rel="1," class="filterCkDel"></a></div>
+
+
+
+
+
+
+
+
+        <span class="left ml_20 pt_2"><a href="#" id="clearFilters">清空</a></span>
+
+    </div>
+    <div class="clear"></div>
+
+    <div class="clearfix mt_10">
+        <div class="content">
+            <div class="tabCon line">
+                <div class="right pageCon2">
+                    <a href="javascript:void(0);" class="grey prev0 min"></a>
+                    <b>1/5</b>
+                    <a href="/newhouse/list?pageNo=2" class="next">下一页</a>
+                </div>
+                <span class="left pt_2"><b class="red">111</b>&nbsp;套符合要求的小区 </span>
+            </div>
+
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" class="tableSearchResult">
+                <colgroup>
+                    <col width="135"></col>
+                    <col width=""></col>
+                </colgroup>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/331" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/04/331/201307251302385533233.bmp_200x150.bmp" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/331" >露香园</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">露香园路1号</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1800.0 — 9000.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：2套">
+                                2套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/331/deal/list"  class="show_tips" tips="已签约案源数：1套">
+                                <b class="blue">1套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/84450" class="bold black" target="_blank">贺来东</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13764684088</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">全款结清付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.0%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/453" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0429/9957EB8C79D14134B889DFDFC99C2B29.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/453" >绿城玉兰公馆</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">春源路58弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">750.0 — 1300.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/453/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/90227" class="bold black" target="_blank">朱志文</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">18217445585</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.2%~2.8%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/412" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0219/20140219150850986LUYCZCACTZFI9B8.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/412" >朗诗虹桥绿郡</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">中山西路699弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">850.0 — 1100.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：26套">
+                                26套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/412/deal/list"  class="show_tips" tips="已签约案源数：24套">
+                                <b class="blue">24套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/97649" class="bold black" target="_blank">袁宇</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">15000333975</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.5%~2.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/30" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/06/30/201203091602159492769.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/30" >仁恒森兰雅苑</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">兰谷路1888弄 / 兰谷路2188弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">820.0 — 2300.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：18套">
+                                18套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/30/deal/list"  class="show_tips" tips="已签约案源数：16套">
+                                <b class="blue">16套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/84603" class="bold black" target="_blank">邱坤</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761198907</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">全款结清付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.5%~1.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/26" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/06/26/201203080904096565563.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/26" >东郊紫园</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">孙农路200弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1200.0 — 2400.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：16套">
+                                16套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/26/deal/list"  class="show_tips" tips="已签约案源数：16套">
+                                <b class="blue">16套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/81399" class="bold black" target="_blank">赵志强</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13524219793</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">全款结清付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.7%~2.7%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/344" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/344" >上海星河湾</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">都会路3888弄 / 都会路3899弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">850.22 — 1200.22万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：20套">
+                                20套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/344/deal/list"  class="show_tips" tips="已签约案源数：18套">
+                                <b class="blue">18套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87544" class="bold black" target="_blank">崔晶晶</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761018658</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.22%~2.22%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/437" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/437" >巴黎花园</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">荣华东道119弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">495.0 — 550.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/437/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87544" class="bold black" target="_blank">崔晶晶</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761018658</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.0%~6.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/318" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/14/318/201307181347180605938.JPG_200x150.JPG" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/318" >上海庄园</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">恒荣路589号18弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">350.0 — 700.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：53套">
+                                53套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/318/deal/list"  class="show_tips" tips="已签约案源数：29套">
+                                <b class="blue">29套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/88804" class="bold black" target="_blank">黎小冬</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">15618860832</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.5%~2.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/363" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2013/1009/20131009130510976J14CR49Q3VFGFWN.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/363" >上海院子</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">百安公路2699弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">350.0 — 1000.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：58套">
+                                58套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/363/deal/list"  class="show_tips" tips="已签约案源数：42套">
+                                <b class="blue">42套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/88804" class="bold black" target="_blank">黎小冬</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">15618860832</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.5%~2.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/381" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2013/1024/20131024143044229AZX2WCNUSITFMTC.bmp_200x150.bmp" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/381" >保利西岸</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">宛平南路1415弄 / 瑞宁路908弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1600.0 — 2700.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：9套">
+                                9套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/381/deal/list"  class="show_tips" tips="已签约案源数：8套">
+                                <b class="blue">8套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/88845" class="bold black" target="_blank">徐春雷</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13817478686</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.5%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/68" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0422/3ECB7078B0C5496AB53834038DC1FC03.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/68" >公馆77</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">建国新路77弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1300.0 — 1600.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：23套">
+                                23套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/68/deal/list"  class="show_tips" tips="已签约案源数：23套">
+                                <b class="blue">23套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/86919" class="bold black" target="_blank">徐彪</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13524290875</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">0.0%~0.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/446" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0420/D43CE5CCF70548F283FA49374B670D43.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/446" >西郊庄园马德里</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">金丰路777弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">460.0 — 3200.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/446/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/88329" class="bold black" target="_blank">邱燕鸣</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13671607058</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.0%~2.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/73" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0310/D70D840B26FA46089D5E7CF3D3D34B00.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/73" >华润外滩九里</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">毛家园路88弄 / 中山南路460号</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">3000.0 — 9000.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：35套">
+                                35套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/73/deal/list"  class="show_tips" tips="已签约案源数：27套">
+                                <b class="blue">27套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/91774" class="bold black" target="_blank">李佩倩</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">18217671814</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.8%~2.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/120" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2013/0930/20130930193711987F1IF70B17JOFAU6.bmp_200x150.bmp" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/120" >香溢花城</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">石泉东路168弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">680.0 — 1000.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：75套">
+                                75套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/120/deal/list"  class="show_tips" tips="已签约案源数：56套">
+                                <b class="blue">56套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/84450" class="bold black" target="_blank">贺来东</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13764684088</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.5%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/341" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2013/0820/20130820155356399DVRULG9ABYIJU01.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/341" >华丽家族汇景天地</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">瞿溪路968弄 / 中山南一路737弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">350.0 — 880.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：55套">
+                                55套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/341/deal/list"  class="show_tips" tips="已签约案源数：52套">
+                                <b class="blue">52套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/84603" class="bold black" target="_blank">邱坤</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761198907</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">3.5%~3.5%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/165" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/02/165/201305091312199824014.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/165" >嘉御庭</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">建国西路238弄 / 建国西路268弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1500.0 — 3500.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：35套">
+                                35套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/165/deal/list"  class="show_tips" tips="已签约案源数：33套">
+                                <b class="blue">33套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/86584" class="bold black" target="_blank">孙上云</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761321591</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">2.0%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/23" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/newhouse/production/14/23/201203061211393815775.gif_200x150.gif" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/23" >凯迪赫菲庄园</a>
+
+                            <span class="green ml_5">[置顶]</span>
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">嘉松中路6633弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">690.0 — 1900.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：4套">
+                                4套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/23/deal/list"  class="show_tips" tips="已签约案源数：3套">
+                                <b class="blue">3套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/103872" class="bold black" target="_blank">曹鹏举</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">18321871681</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">全款结清付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.5%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/470" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/470" >上海星河湾</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">都会路3888弄 / 都会路3899弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1.0 — 2.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/470/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87544" class="bold black" target="_blank">崔晶晶</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761018658</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.0%~2.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/469" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/469" >巴黎花园</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">荣华东道119弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">100.0 — 200.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/469/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87544" class="bold black" target="_blank">崔晶晶</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761018658</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">10.0%~100.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/467" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/467" >上海星河湾</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">都会路3888弄 / 都会路3899弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">850.22 — 1200.22万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/467/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87544" class="bold black" target="_blank">崔晶晶</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13761018658</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.22%~2.22%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/466" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/no.gif_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/466" >上海康城</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">莘松路958弄 / 莘松路1050号 / 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">1.0 — 1.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/466/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/89940" class="bold black" target="_blank">余文辉</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13262536239</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">1.0%~1.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/460" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0515/246D76264B2B4315BA6B6564A75B6502.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/460" >银亿徐汇酩悦</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">斜土路1515号 / 斜土路1519号</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">700.0 — 820.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/460/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/87553" class="bold black" target="_blank">张洪伟</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">15216830856</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">4.0%~6.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/458" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0512/1637133A77184FBDA088C6AF7FB79D06.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/458" >连城一号</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">沪杭公路228弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">110.0 — 120.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/458/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/97016" class="bold black" target="_blank">吴静婷</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">18918902402</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">8.0%~8.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/455" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0503/636D393B3B284126BE740F39C35E5698.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/455" >中建溪岸澜庭</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">德园路1259弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">180.0 — 380.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：1套">
+                                1套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/455/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/88329" class="bold black" target="_blank">邱燕鸣</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13671607058</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">签约付全佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">0.8%~1.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+                <tr class="">
+
+                    <td width="130" align="center">
+                        <a href="/newhouse/454" ><img src="http://fs.dooioo.org/fetch/vp/lp/gi/2014/0514/9D6DEEDD003E417CB071614750AC222E.jpg_200x150.jpg" onerror="this.src='http://fy.dooioo.com/images/no.jpg_200x150.jpg'"/></a>
+                    </td>
+                    <td valign="top" class="info">
+                        <p class="pb_5" note-type="estateNameCange">
+                            <a class="f16 bold" href="/newhouse/454" >星汇广场</a>
+
+
+
+                            <br/>
+                        </p>
+                        <p><span class="list_span_2 in_block ">国安路738弄</span></p>
+                        <p class="green"><span class="grey999">价格区间：</span><b class="green">600.0 — 1000.0万/套</b></p>
+                        <p class="green">
+                            <span class="grey999" note-type="fixed_count">累计转定：</span>
+                            <b class="green show_tips" tips="已转定案源数：0套">
+                                0套
+                            </b>
+                            <span class="grey999 ml_5" note-type="deal_count">累计签约：</span>
+                            <a href="/newhouse/454/deal/list"  class="show_tips" tips="已签约案源数：0套">
+                                <b class="blue">0套</b>
+                            </a>
+                        </p>
+                    </td>
+                    <td width="150" align="left" valign="top">
+                        <span class="grey999">代理专员：</span><a href="http://gzz.dooioo.org/employee360/90228" class="bold black" target="_blank">李涅庸</a><br/>
+                        <span class="grey999">手机号码：</span><b class="green">13585580791</b><br/>
+                        <span class="grey999">结佣方式：</span><b class="red">分批次付佣</b><br/>
+                        <span class="grey999">佣金比例：</span><b class="red">7.0%~9.0%</b><br/>
+                    </td>
+                    <!-- 只有代理中的项目才能置顶 -->
+
+                </tr>
+
+            </table>
+
+
+
+            <div class="">
+                <div class="clearfix pb_10 pt_20"><div class="right pageCon2">
+                    <a href="javascript:void(0);" class="grey prev0">上一页</a>
+                    <b>1</b>
+                    <a href="/newhouse/list?pageNo=2">2</a>
+                    <a href="/newhouse/list?pageNo=3">3</a>
+                    <a href="/newhouse/list?pageNo=4">4</a>
+                    <a href="/newhouse/list?pageNo=5">5</a>
+                    <a href="/newhouse/list?pageNo=2" class="next">下一页</a>
+                </div></div>
+            </div>
+
+        </div>
+
+        <div class="sidebar_r">
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+
+            //选择全部的控制
+            $('[name=_checkAll]').click(function(){
+                $('[name=_newhouse_checked]:checkbox').attr('checked', this.checked);
+                this.checked ? $('.tableSearchResult tr.r_tr').addClass('res_tr') : $('.tableSearchResult tr.r_tr').removeClass('res_tr');
+                $("#selectedCount").html($('[name=_newhouse_checked]:checked').length);
+            });
+
+            //单个选择的控制
+            $('[name=_newhouse_checked]:checkbox').click(function(){
+                this.checked ? $(this).closest('tr').addClass('res_tr') : $(this).closest('tr').removeClass('res_tr');
+                $("#selectedCount").html($('[name=_newhouse_checked]:checked').length);
+            });
+
+            // 点击行选中多选按钮
+            $("tr.r_tr").click(function(e){
+                if( e.target.tagName.toLowerCase() == 'input' || e.target.tagName.toLowerCase() == 'a' ){
+                    return;
+                }
+
+                var checkedStatus = $(this).find("[name=_newhouse_checked]:checkbox").attr("checked");
+                $(this).find("[name=_newhouse_checked]:checkbox").attr("checked", !checkedStatus);
+
+                !checkedStatus ? $(this).addClass('res_tr') : $(this).removeClass('res_tr');
+
+                $("#selectedCount").html($('[name=_newhouse_checked]:checked').length);
+            });
+
+            $("a.js_assignNewhouseList").click(function(){
+                if($("input[name='_newhouse_checked']:checked").length == 0){
+                    alert("请至少选择一个一手项目");
+                    return false;
+                }
+
+                var clientUrl = 'http://ky.dooioo.org/api/inquiry/newHouseMatchProperty' + "?propertyIds=" + spliceNewhouseCheckedJsons()
+                        + "&inquiryId=&empNo=87544";
+
+                $.ajax({
+                    type:'POST',
+                    url:'/newhouse/httpClient/post',
+                    cache: false,
+                    data:{
+                        'clientUrl':clientUrl
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if(data.clientResult.status != "ok"){
+                            alert("配盘失败 " + data.clientResult.message);
+                            return false;
+                        }
+                        window.location.href = 'http://ky.dooioo.org/inquiry/';
+                    }
+                });
+
+            });
+
+            $(".show_tips").hover(
+                    function(){ showTips($(this)); },
+                    function(){ hideTips($(this)); }
+            );
+
+            //列表楼盘名的自动提示
+            $('#keyword').autocomplete({
+                urlOrData: "http://loupan.dooioo.org/api/estate/getAutoEstateName",
+                itemTextKey: 'estateName',
+                dataKey: 'autoEstate',
+                selectCallback: function(selectItem){	//选择选项时，回调函数
+                    searchKeyword(selectItem.estateName);
+                },
+                setRequestParams: function(requestParams){
+                    requestParams.keyword = $('#keyword').val();
+                },
+                autocompleteOnfocus: true
+            });
+
+            $("input.setTop").click(function(){//置顶
+                window.location.href = replaceLocalUrlParams({toping: 1, newhouseId: $(this).attr("newhouseId")});
+            });
+
+            $("a.cancelTop").click(function(){//取消置顶
+                window.location.href = replaceLocalUrlParams({toping: 0, newhouseId: $(this).attr("newhouseId")});
+            });
+
+            $("a.filterDel").click(function() {	//删除单值字段
+                window.location.href = removeParams($(this).attr("rel"));
+                return false;
+            });
+
+            $("a.filterCkDel").click(function() {	//删除多个值用“,”分隔的字段
+                window.location.href = removeValues($(this).attr("rel"));
+                return false;
+            });
+
+
+            $(".filterBox2 input[name=projectStatus]").click(connectMultiValues);
+            $(".filterBox2 input[name=sealed]").click(connectMultiValues);
+            $(".filterBox2 input[name=status]").click(connectMultiValues);
+
+            $("#currentEmpNo").click(function() {
+                toggleCheckboxStyle(this);
+                var resultVal = $(this).attr("checked")==true ? $(this).val() : "";
+                window.location.href = replaceLocalUrlParams({currentEmpNo: resultVal, pageNo:1});
+                return false;
+            });
+
+            $('#clearFilters').click(function(){
+                var strUrl = window.location.href;
+                strUrl = removeParams("keyword,district,usage,currentEmpNo,sealed");
+                var newUrl = parseURL(strUrl);
+                window.location.href = replaceUrlParams(newUrl, {projectStatus: '', pageNo:1});
+                return false;
+            });
+        });
+
+
+        function toggleCheckboxStyle(ckObj){
+            if($(ckObj).attr("checked")==true) {
+                $(ckObj).attr("checked", true);
+                $(ckObj).parent("label").addClass("bold red");
+            } else {
+                $(ckObj).attr("checked", false);
+                $(ckObj).parent("label").removeClass("bold red");
+            }
+        }
+
+        function connectMultiValues(){
+            toggleCheckboxStyle(this);
+            var allCheckedValues = "";
+            var filterChks = $("input:[name='"+$(this).attr('name')+"'][checked]");
+            for(var c = 0; c < filterChks.length; c ++ ) {
+                allCheckedValues += filterChks[c].value + ",";
+            }
+
+            var paramObj = new Object;
+            paramObj[$(this).attr('name')] = allCheckedValues;
+            paramObj.pageNo=1;
+
+            window.location.href = replaceLocalUrlParams(paramObj);
+            return false;
+        }
+
+        function searchKeyword(keyword) {
+            if(keyword == null || keyword == '' || keyword == '小区名字 小区地址 代理专员姓名')
+                keyword = "";
+            var strUrl = window.location.href;
+            var newUrl = parseURL(strUrl);
+            keyword = encodeURI(keyword);
+            //alert((__=-~-~[])*(-~[]<<(__))+__*(-~[]<<(__))+(____=-~-~__)+(-~[]<<(__))*-~____+____+__+0);
+            window.location.href = replaceUrlParams(newUrl, {keyword:keyword, pageNo:1});
+        }
+
+        $("a.searchBtn").click(function(){
+            searchKeyword($('#keyword').val());
+            return false;
+        });
+
+        $('#keyword').bind('keyup',function(event) {
+            if(event.keyCode == 13){
+                searchKeyword($('#keyword').val());
+            }
+        });
+
+        function removeParam( paramField ) {
+            var url = window.location.href;
+            url = removeOneParam(url, paramField);
+            return url;
+        }
+
+        function removeValues( paramValue ){
+            var url = window.location.href;
+            return url.replace(paramValue, "");
+        }
+
+        //获取选中的一手项目的楼盘编号
+        function spliceNewhouseCheckedJsons(){
+            var reltJsons = "";
+            $("input[name='_newhouse_checked']:checked").each(function() {
+                reltJsons += ',' + $(this).val();
+            });
+
+            reltJsons = reltJsons.replace(",", "");
+            reltJsons += "";
+            return reltJsons;
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <!--begin: footer-->
+    <div class="footer clearFix">&copy;2015 德佑地产</div>
+    <!--end: footer-->
+
+
+
+
+    <script type="text/javascript" language="javascript" src="/static/js/portal.js?v=0320"></script>
+
+
+
+
+
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/autocomplete.js?v=0320"></script>
+
+
+
+
+</body>
+</html>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/tipsNotice.js?v=0320"></script>
+<script type="text/javascript">
+
+    $(function(){
+        _tipNotice = new __tipNotice(87544);
+
+        _tipNotice.run(true);
+    });
+
+</script>

@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script>
+        var headerParameters={ empNo:'87544',
+            empName:'崔晶晶',
+            password:'f4cdc27a40ec1c925eaf57c7a1fca50d',
+            env:'integration'};
+    </script>
+    <script type="text/javascript">
+        if (window.location.host.indexOf("dooioo.com")!=-1){  //过滤掉所有非正式环境的访问
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15293932-21']);
+            _gaq.push(['_setDomainName', 'dooioo.com']);  //自动为二级域名分组，如120.dooioo.com
+            _gaq.push(['_setSiteSpeedSampleRate', 10]);  //为10%的页面访问监控速度
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_setCustomVar', 1, '用户', '(87544)', 1]); //获取访客的信息，用户名+工号
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var ubt_js = "<script src='http://logment.dooioo.com/ubt.js' type='text/javascript'><\/script>";
+        document.write(ubt_js);
+    </script>
+
+    <script src="http://dui.dooioo.org/public/js/jkk/clientmonitor.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/main.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/header.css?v=0320" />
+
+
+    <!-- include css 文件接受 -->
+
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/jquery-1.6.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/fns.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/jquery.json-2.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/angular.min.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/fky.css?v=0320">
+</head>
+
+<body>
+<div id="new_header"></div>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/header.js?v=0320"></script>
+<input type="hidden" id="ip" value="10.8.205.72"/>
+
+<!DOCTYPE html>
+<html ng-app="filingAdd" ng-cloak>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>项目报备 - 一手 - 德佑地产</title>
+    <link type="text/css" rel="stylesheet" href="/static/front/filing/filingAdd/css/filingAdd.css?v=0320" />
+    <!-- 全局参数 -->
+    <script>
+        var filingObj = null;
+        var f = false;
+        if(f){
+            filingObj = f;
+        }
+    </script>
+</head>
+<body ng-controller="FilingAddController">
+<div id="new_header"></div>
+<div class="container">
+    <div class="location"><a href="/filing/list">项目报备</a> &gt; </div>
+
+    <div class="mt_15 clearfix">
+        <h1 class="f18 left">报备新项目</h1>
+        <span class="ml_10 left mt_2">标注“<span class="red">●</span>”为必填项</span>
+    </div>
+
+    <form id="formEdit" class="mt_15">
+        <table border="0" cellpadding="0" cellspacing="0" class="tableFormNew mt_15">
+            <tbody>
+            <tr>
+                <td class="tdTitle" width="100">项目名称：</td>
+                <td class="request" width="20">●</td>
+                <td width="840" class="clearfix">
+                    <div class="left mr_10"><input type="text" class="txtNew w150" maxlength="20" ng-model="filing.filingName" name="prjName" rule="required invalidStr"></div>
+                    <div class="left ml_20">
+                        <ul>
+                            <li class="mb_5" ng-repeat="item in filing.aliasesList">
+                                别名 <input type="text" name="aliases" class="ml_20 txtNew w150" maxlength="20" ng-model="item.aliases">
+                                <a href="javascript:;"  class="btnMini in_block ml_5" ng-class="{'miniNo':!$first,'miniAdd':$first}" ng-click="doInputItem($index,filing.aliasesList)"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">项目地址：</td>
+                <td class="request">●</td>
+                <td class="clearfix">
+                    <div class="left">
+                        <select rule="required" name="city" groupby="cityAndArea" ng-model="filing.cityName" ng-change="changeArea(filing.cityName)" ng-options="item.cityName as item.cityName for item in cityList">
+                        </select>
+
+                        <select rule="required" name="area" groupby="cityAndArea" ng-model="filing.areaName" ng-options="item.districtName as item.districtName for item in districtList">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="left ml_10">
+                        <ul>
+                            <li class="mb_5" ng-repeat="item in filing.addressList">
+                                <input type="text" name="address" class="txtNew w200" placeholder="街道名称" maxlength="100" ng-model="item.address" name="street1" rule="required" groupby="address">
+                                <a href="javascript:;" class="btnMini in_block ml_5" ng-class="{'miniNo':!$first,'miniAdd':$first}" ng-click="doInputItem($index,filing.addressList)"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">项目类型：</td>
+                <td class="request">●</td>
+                <td>
+                    <div checkboxcontainer ng-model="filing.itemType" class="lineH200">
+                        <label><input type="checkbox" class="js_checkbox" value="住宅" name="prjType" rule="required">住宅</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="别墅" name="prjType" rule="required">别墅</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="公寓" name="prjType" rule="required">公寓</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="商住" name="prjType" rule="required">商住</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="厂房" name="prjType" rule="required">厂房</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="商铺" name="prjType" rule="required">商铺</label>
+                        <label class="ml_20"><input type="checkbox" class="js_checkbox" value="其他" name="prjType" rule="required">其他</label>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+            <!-- 联系人有多组 可以用repeat begin -->
+            <tbody ng-repeat="item in filing.contactsList" class="contactBody">
+            <tr>
+                <td class="tdTitle">联系人：</td>
+                <td class="request">●</td>
+                <td>
+                    <input type="text" class="txtNew w150" ng-model="item.contactsName" maxlength="10" name="contact{{$index}}" rule="required">
+                    <a href="javascript:;" class="btnMini in_block ml_5" ng-class="{'miniNo':!$first,'miniAdd':$first}" ng-click="doInputItem($index,filing.contactsList)"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">身份：</td>
+                <td class="request">●</td>
+                <td>
+                    <label><input ng-model="item.contactsType" name="contactType{{$index}}" type="radio" value="0"  rule="required">开发商</label>
+                    <label class="ml_20"><input ng-model="item.contactsType" name="contactType{{$index}}" type="radio" value="1"  rule="required">代理商</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">联系号码：</td>
+                <td class="request">●</td>
+                <td>
+                    <input type="text" class="txtNew tt160" name="tel{{$index}}" ng-model="item.contactsPhone" rule="required invalidPhone phoneRule" />
+                    <span class="grey999 ml_5">请输入手机或固话，分机号以"转"字隔开</span>
+                </td>
+            </tr>
+            </tbody>
+            <!-- 联系人有多组 可以用repeat end -->
+
+            <tbody>
+            <tr>
+                <td class="tdTitle">预计送审时间：</td>
+                <td class="request">●</td>
+                <td>
+                    <label><input name="submitTime" ng-model="filing.expectedAuditType" type="radio" value="0" groupby="submitTime"></label>
+                    <input type="text" class="txtDate" date-picker="" readonly="readonly" ng-show="$parent.filing.expectedAuditType == '0'" attr="{{$parent.filing.expectedAuditType}}" name="submitTimeValue" rule="required" groupby="submitTime" ng-model="$parent.filing.expectedAuditTime">
+                    <input type="text" class="txtDate" date-picker="" readonly="readonly" ng-show="$parent.filing.expectedAuditType == '1'" attr="{{$parent.filing.expectedAuditType}}" ng-model="$parent.filing.expectedAuditTime">
+                    <label class="ml_20"><input name="submitTime" ng-model="filing.expectedAuditType" type="radio" value="1">待定</label>
+                </td>
+            </tr>
+
+            <tr ng-show="filing.id == null">
+                <td class="tdTitle">项目跟进：</td>
+                <td class="request">●</td>
+                <td>
+                    <textarea class="tA t500" placeholder="商务条件、目前节点" name="followContent" ng-model="filing.followContent" maxlength="1000" rule="required"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="txtRight mt_15">
+        <a href="javascript:;" class="btn-normal btn-silver in_block" ng-click="cancelForm()">取消</a>
+        <input type="button" class="btn-normal btn-blue in_block ml_5" value="提交" ng-disabled="canApplyFor" ng-class="{'disable':canApplyFor}" id="submitFormEdit" ng-click="applyForFiling()"><!--   ng-click="submitForm()" -->
+    </div>
+
+    <!--begin: footer-->
+
+
+
+
+
+
+
+
+
+    <!--begin: footer-->
+    <div class="footer clearFix">&copy;2015 德佑地产</div>
+    <!--end: footer-->
+
+
+
+</body>
+</html>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/tipsNotice.js?v=0320"></script>
+<script type="text/javascript">
+
+    $(function(){
+        _tipNotice = new __tipNotice(87544);
+
+        _tipNotice.run(true);
+    });
+
+</script>
+<!--end: footer-->
+
+<!-- 重复报备提醒弹层 -->
+<div class="popLayer bubbleBox" id="repeatApplyPopLayer">
+    <div class="bubbleBoxTitle clearfix">
+        <h1>重复报备提醒</h1>
+        <div class="cls"><a href="javascript:;" class="closePopBox xx" ng-click="cancelX()"></a></div>
+    </div>
+    <div class="bubbleBoxCon pl_20 pr_20 pb_10">
+        <div class="grey999">您报备的项目可能已有他人报备</div>
+        <div class="bd_ddd pd_6 mt_10">
+            <table width="100%" cellpadding="3">
+                <tbody>
+                <tr class="grey666">
+                    <th align="left" width="28%">项目名称</th>
+                    <th align="left" width="32%">地址</th>
+                    <th align="left" width="20%">部门</th>
+                    <th align="left" width="20%">状态</th>
+                </tr>
+                <tr ng-repeat="item in matchFilings">
+                    <td>{{item.name}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.orgName}}</td>
+                    <td>{{item.repeatProjectStatusDesc | strBarFilter}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bubbleBoxBtn">
+        <input type="button" class="closePopBox btn-small btn-silver in_block" ng-disabled="canSubmit" ng-class="{'disable':canSubmit}" ng-click="submitForm(0)" value="放弃报备" /><!--  onclick=" onclick="hidePopupDiv($('#repeatApplyPopLayer'))" -->
+        <input type="button" class="closePopBox btn-small btn-blue in_block ml_5" ng-disabled="canSubmit" ng-class="{'disable':canSubmit}" ng-click="submitForm(3)" value="继续报备，申请争议" /><!--  onclick="hidePopupDiv($('#repeatApplyPopLayer'))"  -->
+    </div>
+</div>
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/WdatePicker.js?v=0320"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/validation.js?v=0320"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/directive.js?v=0320"></script>
+<script>
+    /**
+     * 添加所有字符
+     * @param s1 原始字符
+     * @param s2 需要替换
+     */
+    String.prototype.replaceAll = function (s1, s2) {
+        return this.replace(new RegExp(s1, "gm"), s2);
+    };
+
+    //页面刚进来时，根据相关判断出来重复报备提醒的弹层，如果符合出现的条件，就调用下面的代码，如果不符合就不用调用
+    //showPopupDiv($('#repeatApplyPopLayer'));
+
+    var validator = $('#formEdit').validate();//实例化验证插件
+
+
+    //引自客源的添加私客页面的验证方式
+    function isValidPhoneNumber(phoneNumber) {
+        var inValidStarts = ['000', '7', '9', '10', '11', '12', '16', '19', '20', '30'];
+
+        phoneNumber = phoneNumber.replaceAll("[\\.\\*\\+\\-=—]", "");//replaceAll函数是自己扩展的
+
+        if(!phoneNumber || $.trim(phoneNumber) === ''){
+            return false;
+        }
+
+        for(var i=0, len=inValidStarts.length; i<len; i++){
+            if(startsWith(phoneNumber, inValidStarts[i])){
+                return false;
+            }
+        }
+
+        if(startsWith(phoneNumber, '01') && startsWith(phoneNumber, '010') === false && phoneNumber.length != 12){
+            return false;
+        }
+
+        if(startsWith(phoneNumber, '1') && phoneNumber.length != 11){
+            return false;
+        }
+
+        return !new RegExp(phoneNumber.substring(0, 1) + '{' + phoneNumber.length + '}').test(phoneNumber);
+
+        function startsWith(str, start){
+            if(!str || !start || str.length < start.length){
+                return false;
+            }
+
+            return (str.slice(0, start.length) === start);
+        }
+    }
+
+    //关于号码的两个验证
+    if(!validator.rules.ruleConfig.phoneRule){//自定义验证规则 phoneRule
+        validator.addRule('phoneRule',{
+            validate: function(element){
+                val = $.trim(element.val());
+                if(val === ''){
+                    return true;
+                }
+                //引自房源的添加号码的地方的验证
+                return (/^\d{8,20}(转\d{1,8})$/.test(val) || /^\d{8,20}$/.test(val));
+            },
+            message: '必须为8-20位数字，若有分机请写“转”。例如51234567转404'
+        });
+    }
+
+    if(!validator.rules.ruleConfig.invalidPhone){//自定义验证规则 invalidPhone
+        validator.addRule('invalidPhone',{
+            validate: function(element){
+                val = $.trim(element.val());
+                if(val === ''){
+                    return true;
+                }
+                return isValidPhoneNumber(val);
+            },
+            message: '请输入有效的电话号码'
+        });
+    }
+
+    //自定义规则：invalidStr 不支持除括号以外的其他符号
+    if(!validator.rules.ruleConfig.invalidStr){//自定义验证规则 invalidStr
+        validator.addRule('invalidStr',{
+            validate: function(element){
+                val = $.trim(element.val());
+                if(val === ''){
+                    return true;
+                }
+                var obj = toTxt(val);
+                val = obj.value;
+                return obj.isMatch&&(/^([0-9A-Za-z\u4e00-\u9fa5]*?(\（)[0-9A-Za-z\u4e00-\u9fa5]*\）[0-9A-Za-z\u4e00-\u9fa5]*|[0-9A-Za-z\u4e00-\u9fa5]*)$/g.test(val));//验证数字字母汉字的
+            },
+            message: '只能使用数字、字母、汉字或成对全角圆括号'
+        });
+    }
+
+    /*正则表达式 替换括号,尖括号等*/
+    function toTxt(str) {
+        var RexStr = /\(|\)|\（|\）/g;
+        var flag1 = 0;
+        var flag2 = 0;
+        str = str.replace(RexStr, function(MatchStr) {
+            switch (MatchStr) {
+                case "（":
+                    flag1 = flag1 + 1;
+                    return '';
+                    break;
+                case "）":
+                    flag1 = flag1 - 1;
+                    return '';
+                    break;
+                case "(":
+                    flag2 = flag2 + 1;
+                    return '';
+                    break;
+                case ")":
+                    flag2 = flag2 - 1;
+                    return '';
+                    break;
+                default:
+                    break;
+            }
+        });
+        var obj = {
+            value:str,
+            isMatch:(flag1==0&&flag2==0)
+        };
+        return obj;
+    }
+
+    /* $('#submitFormEdit').click(function(){
+     if (validator.validateForm()){
+     //如果通过验证，提交成功后，跳转至详情页，表单提交的话，跳转由后端做
+     $('#submitFormEdit').submit();
+     }
+     }); */
+</script>
+<script src="/static/front/filing/filingAdd/app.js"></script>
+<script src="/static/front/filing/filingAdd/controller/FilingAddController.js"></script>
+<script src="/static/front/filing/filingAdd/filter/FilingAddFilter.js"></script>
+</body>
+</html>

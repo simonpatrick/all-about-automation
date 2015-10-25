@@ -1,0 +1,253 @@
+
+
+
+<!DOCTYPE html>
+<html ng-app="filingListApp" ng-controller="filingListController">
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>报备及项目管理 - 一手  - 德佑地产</title>
+
+    <script>
+        var headerParameters={ empNo:'87544',
+            empName:'崔晶晶',
+            password:'f4cdc27a40ec1c925eaf57c7a1fca50d',
+            env:'integration'};
+    </script>
+    <script type="text/javascript">
+        if (window.location.host.indexOf("dooioo.com")!=-1){  //过滤掉所有非正式环境的访问
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15293932-21']);
+            _gaq.push(['_setDomainName', 'dooioo.com']);  //自动为二级域名分组，如120.dooioo.com
+            _gaq.push(['_setSiteSpeedSampleRate', 10]);  //为10%的页面访问监控速度
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_setCustomVar', 1, '用户', '(87544)', 1]); //获取访客的信息，用户名+工号
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var ubt_js = "<script src='http://logment.dooioo.com/ubt.js' type='text/javascript'><\/script>";
+        document.write(ubt_js);
+    </script>
+
+    <script src="http://dui.dooioo.org/public/js/jkk/clientmonitor.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/main.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/header.css?v=0320" />
+
+
+    <!-- include css 文件接受 -->
+
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/jquery-1.6.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/fns.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/jquery.json-2.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/angular.min.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/fky.css?v=0320">
+</head>
+
+<body>
+<div id="new_header"></div>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/header.js?v=0320"></script>
+<input type="hidden" id="ip" value="10.8.205.72"/>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/treeNew.css?v=0320" />
+    <script src="http://dui.dooioo.com/public/js/paginate.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/validation.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.com/public/json/dooioo/dooiooAll.js?v=0320"></script><!--数据源-->
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/plugs/jquery-tree-1.0.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/directive.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.com/public/js/autocomplete.js?v=0320"></script>
+    <script type="text/javascript"  src="/static/front/filing/filingList/app.js?v=0320"></script>
+    <script type="text/javascript"  src="/static/front/filing/filingList/controller/FilingListController.js?v=0320"></script>
+    <script type="text/javascript"  src="/static/front/filing/filingList/filter/filingListFilter.js?v=0320"></script>
+    <script type="text/javascript"  src="/static/front/filing/filingList/data/init.js?v=0320"></script>
+
+</head>
+
+<body>
+
+<div id="new_header"></div>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/header.js?v=0320"></script>
+<div class="container" style="width:1140px">
+
+    <h1 class="f18 mt_15">一手</h1>
+    <div class="navTabsub mt_15">
+        <a href="/newhouse/list">新房频道</a>
+
+        <a href="/filing/list" class="current">报备及项目管理</a>
+
+
+
+        <a href="/newhouse/contract/list">合同审批</a>
+
+    </div>
+    <div class="boxWrapBlue mt_5">
+        <div class="boxWrapFilter">
+            <span class="T">状态：</span>
+            <a href="#" ng-repeat="status in filingStatusList"
+               ng-class="{true:'current'}[params.filingStatusCurrent==status.filingStatus]"
+               ng-click="modifyFilingStatus(status.filingStatus)">
+                {{status.filingStatusName}}
+            </a>
+        </div>
+        <div class="boxWrapFilter2">
+            <p>
+                <span class="grey999">筛选：</span>
+		        	<span>
+						<span class="ml_5">项目名称：
+							<input type="text" class="sarchipt searchtxt24 w100" ng-model="searchParams.filingName">
+						</span>
+					</span>
+					<span>
+						<span class="ml_20">专员名称：</span>
+						<duitree datasource-type="front" can-reset="true" selected-data="params.filingEmp" contain-employee="true" checkable-type="员工" tree-type="popup" searchable="true"></duitree>
+					</span>
+                <span ng-show="params.filingStatusCurrent == 1" class="ml_20">未跟进超过 <input type="text" class="sarchipt searchtxt24 t35" ng-model="searchParams.lastFollowDay" maxlength='3'/> 天</span>
+					<span>
+						<span class="ml_20">类型：</span>
+						<select ng-model="params.filingType" ng-options="m.id as m.name for m in filingTypeList">
+                            <option value="">全部</option>
+                        </select>
+					</span>
+					<span>
+						<span class="ml_20">区域：</span>
+						<select ng-model="params.districtName" ng-options = "m.districtName as m.districtName for m in districtList">
+                            <option value="">全部</option>
+                        </select>
+					</span>
+                <a href="javascript:;" class="btn-small btn-blue in_block ml_20" ng-click="getFilingJsonPage();">查询</a>
+                <a ng-show="auth.canDownLoadData" href="javascript:;" class="btn-small btn-blue in_block ml_20" ng-click="filingExportXls();">导出</a>
+            </p>
+        </div>
+    </div>
+
+    <p class="mt_15 clearfix">
+        <span class="left">共有 <span class="red">{{page.totalCount}}</span> 条符合条件的记录</span>
+        <a href="/filing/add" target="_blank" class="btn-small btn-green in_block ml_5 right">新增报备</a>
+    </p>
+
+    <table width="100%" cellspacing="0" class="tableListNew tableNarrow mt_5">
+        <tr class="trHighHead">
+            <td width="80" nowrap>项目名称</td>
+            <td width="80" nowrap>部门</td>
+            <td width="80" nowrap>报备人</td>
+            <td width="80" nowrap>项目类型</td>
+            <td width="180" nowrap>地址</td>
+            <td width="60" nowrap>联系人</td>
+            <td width="60" nowrap>身份</td>
+            <td width="80" nowrap>首次报备时间</td>
+            <td width="80" nowrap>{{params.filingStatusCurrent|filingStatusFilter2}}</td>
+            <td ng-show="params.filingStatusCurrent!=3">最新跟进</td>
+            <td width="55" nowrap ng-show="showFilingOperating();">操作</td>
+        </tr>
+        <tr ng-show="isLoading">
+            <td colspan="11" class="pr_10" align="center">
+                <img src="http://dui.dooioo.com/public/images/icon_ajaxload.gif"/>
+            </td>
+        </tr>
+        <tr ng-show="!isLoading" ng-repeat="temp in page.pageList">
+            <td><a href="/filing/detail/{{temp.id}}" target="_blank">{{temp.filingName}}</a></td>
+            <td>{{temp.orgName}}</td>
+            <td>{{temp.userName}}</td>
+            <td>{{temp.typeName}}</td>
+            <td>{{temp.firstAddressAll}}</td>
+            <td>{{temp.contactsName}}<br/>{{temp.contactsPhone}}</td>
+            <td>{{temp.contactsTypeName}}</td>
+            <td>{{temp.createdAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{temp | filingStatusFilter}}</td>
+            <td ng-show="params.filingStatusCurrent!=3">{{temp.lastFollowContent}}</td>
+            <td ng-show="showFilingOperating();">
+                <a href="javascript:;" class="btn-small btn-silver in_block" ng-click="addFilingFollow(temp,$index)">写跟进</a>
+            </td>
+        </tr>
+    </table>
+    <div class="pageNew txtRight mt_10">
+        <paginator display-num="5" show-jump="false" record-count="page.totalCount"
+                   page-size="page.pageSize" current-page="params.currentPage"></paginator>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--begin: footer-->
+<div class="footer clearFix">&copy;2015 德佑地产</div>
+<!--end: footer-->
+
+
+
+</body>
+</html>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/tipsNotice.js?v=0320"></script>
+<script type="text/javascript">
+
+    $(function(){
+        _tipNotice = new __tipNotice(87544);
+
+        _tipNotice.run(true);
+    });
+
+</script>
+
+<!-- begin: 表单操作弹层 -->
+<div class="popLayer bubbleBox" id="writeFollowPop">
+    <form id="formTrace">
+        <div class="bubbleBoxTitle clearfix">
+            <h1>{{followParams.filingName}}</h1>
+            <div class="cls"><a href="javascript:;" class="closePopBox xx" ng-click="hideWriteFollowPop();"></a></div>
+        </div>
+        <div class="bubbleBoxCon pd_20">
+            <table border="0" cellpadding="0" cellspacing="0" class="tableFormNew mt_10">
+                <tbody>
+                <tr>
+                    <p ng-show="followParams.errMsg" style="font-weight:bold;color:red;">必填</p>
+                    <td class="tdTitle" width="100">跟进内容：</td>
+                    <td class="request" width="20">●</td>
+                    <td>
+                        <textarea class="tA tt280" maxlength="1000" name="traceContent" rule="required" ng-model="followParams.followContent"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bubbleBoxBtn">
+            <a href="javascript:;" class="btn-small btn-silver in_block" ng-click="hideWriteFollowPop();">关闭</a>
+            <input type="button"  class="btn-small btn-blue in_block" ng-disabled="canSubmit" ng-class="{'disable':canSubmit}"  id="trace_submit" ng-click="submit()" value="提交" />
+        </div>
+    </form>
+</div><br />
+<!-- begin: 表单操作弹层 -->
+
+
+<script>
+    var filingTypeList = [{"id":1,"name":"住宅"},{"id":2,"name":"别墅"},{"id":3,"name":"公寓"},{"id":4,"name":"商住"},{"id":5,"name":"厂房"},{"id":6,"name":"商铺"},{"id":7,"name":"其他"}];
+    var districtList = [{"cityName":"上海","districtName":"静安","districtNo":"01"},{"cityName":"上海","districtName":"徐汇","districtNo":"02"},{"cityName":"上海","districtName":"卢湾","districtNo":"03"},{"cityName":"上海","districtName":"黄浦","districtNo":"04"},{"cityName":"上海","districtName":"长宁","districtNo":"05"},{"cityName":"上海","districtName":"普陀","districtNo":"06"},{"cityName":"上海","districtName":"浦东","districtNo":"07"},{"cityName":"上海","districtName":"宝山","districtNo":"08"},{"cityName":"上海","districtName":"闸北","districtNo":"09"},{"cityName":"上海","districtName":"杨浦","districtNo":"10"},{"cityName":"上海","districtName":"虹口","districtNo":"11"},{"cityName":"上海","districtName":"闵行","districtNo":"12"},{"cityName":"上海","districtName":"金山","districtNo":"13"},{"cityName":"上海","districtName":"嘉定","districtNo":"14"},{"cityName":"上海","districtName":"崇明","districtNo":"15"},{"cityName":"上海","districtName":"奉贤","districtNo":"16"},{"cityName":"上海","districtName":"松江","districtNo":"17"},{"cityName":"上海","districtName":"青浦","districtNo":"18"},{"cityName":"上海","districtName":"南汇","districtNo":"19"},{"cityName":null,"districtName":"太仓","districtNo":null},{"cityName":null,"districtName":"昆山","districtNo":null},{"cityName":null,"districtName":"其他","districtNo":null}];
+    var canDownLoadData = false;
+</script>
+
+</body>
+</html>

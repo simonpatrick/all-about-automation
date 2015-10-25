@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script>
+        var headerParameters={ empNo:'87544',
+            empName:'崔晶晶',
+            password:'f4cdc27a40ec1c925eaf57c7a1fca50d',
+            env:'integration'};
+    </script>
+    <script type="text/javascript">
+        if (window.location.host.indexOf("dooioo.com")!=-1){  //过滤掉所有非正式环境的访问
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15293932-21']);
+            _gaq.push(['_setDomainName', 'dooioo.com']);  //自动为二级域名分组，如120.dooioo.com
+            _gaq.push(['_setSiteSpeedSampleRate', 10]);  //为10%的页面访问监控速度
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_setCustomVar', 1, '用户', '(87544)', 1]); //获取访客的信息，用户名+工号
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var ubt_js = "<script src='http://logment.dooioo.com/ubt.js' type='text/javascript'><\/script>";
+        document.write(ubt_js);
+    </script>
+
+    <script src="http://dui.dooioo.org/public/js/jkk/clientmonitor.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/main.css?v=0320" />
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/header.css?v=0320" />
+
+
+    <!-- include css 文件接受 -->
+
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/jquery-1.6.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/fns.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/jquery.json-2.2.min.js?v=0320"></script>
+    <script type="text/javascript" src="http://dui.dooioo.org/public/js/lib/angular.min.js?v=0320"></script>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.org/public/css/fky.css?v=0320">
+</head>
+
+<body>
+<div id="new_header"></div>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/header.js?v=0320"></script>
+<input type="hidden" id="ip" value="10.8.205.72"/>
+
+<!DOCTYPE html>
+<html ng-app="contractApp">
+<head>
+    <meta charset="utf-8" />
+    <title>合同审批 - 一手 - 德佑地产</title>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/treeNew.css?v=0320" />
+    <link rel="stylesheet" type="text/css" href="http://dui.dooioo.com/public/css/fileupload.css?v=0320">
+    <style>
+        .tableFormNew tr:last-of-type td{border-bottom:none}
+        .tableFormNew{border-bottom:none}
+        .tableFormNew tbody tr:last-of-type td{border-bottom:1px solid #d5dee7;}
+        .tableFormNew tbody:last-of-type tr:last-of-type td{border-bottom:none}
+    </style>
+</head>
+<body ng-controller="contractAdd" ng-cloak>
+<a  id="downloadBtn" style="display:none" download="{{downLoad.fileName}}" href="{{downLoad.url}}"></a>
+
+<div class="container">
+    <div class="location"><a href="/newhouse/contract/list/task">一手代理</a> &gt; </div>
+    <h1 class="f18 mt_15">合同商务条件信息搜集<span class="f12 grey999 noBold ml_10"> 标注 “<span class="red">●</span>” 为必填项</span></h1>
+
+    <form id="formEdit">
+        <div class="boxWrapBlue pd_10 mt_5">
+            <table border="0" cellpadding="5" cellspacing="0">
+                <tr>
+                    <td align="right" width="60" nowrap>日期：</td>
+                    <td width="280"><b>{{date | date:"yyyy-MM-dd"}}</b></td>
+                    <td align="right" width="60" nowrap>代理专员：</td>
+                    <td width="280"><b>{{filing.userName}}</b></td>
+                    <td align="right" width="60" nowrap>部门：</td>
+                    <td width="160"><b>{{filing.orgName}}</b></td>
+                </tr>
+                <tr>
+                    <td align="right" nowrap>项目名称：</td>
+                    <td><b>{{filing.filingName}}</b></td>
+                    <td align="right" nowrap>项目地址：</td>
+                    <td><b>{{filing.cityName}}{{filing.areaName}}{{filing.addressList|addressFilter}}</b></td>
+                    <td align="right" nowrap>项目性质：</td>
+                    <td><b>{{filing.typeName}}</b></td>
+                </tr>
+            </table>
+        </div>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="tableFormNew mt_15">
+            <tr>
+                <td class="tdTitle" width="150">合同名称：</td>
+                <td class="request" width="20">●</td>
+                <td>
+                    <input ng-model="contract.contractName" type="text" class="txtNew tt280" name="htmc" rule="required" maxlength="25" />
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">开盘时间：</td>
+                <td class="request">●</td>
+                <td>
+                    <input ng-model="$parent.contract.openTime" type="text" readonly="readonly" class="txtDate" date-picker build_onshow="true" name="kpsj" rule="required" />
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">本期销控信息：</td>
+                <td class="request">●</td>
+                <td>
+						<span>总销
+							<input type="text" ng-model="contract.totalSaleCount" class="txtNew t35" name="zxts" rule="required integer lessthan1000" groupBy="bqxkxx" title="总销套数" maxlength="4"/>套
+						</span>
+						<span class="ml_20">本期 
+							<input type="text" ng-model="contract.currentSaleCount" class="txtNew t35" name="bqts" rule="required integer lessthan1000" groupBy="bqxkxx" title="本期套数" maxlength="4"/>套
+						</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">我司名称：</td>
+                <td class="request">●</td>
+                <td>
+                    <label class="mr_20" ng-repeat="cname in companyNameList">
+                        <input type="radio" name="cname" ng-model="contract.companyName" value="{{cname.value}}" rule="required"/>{{cname.value}}
+                    </label>
+                </td>
+            </tr>
+            <tbody ng-repeat="relative in contract.contractRelativeList" class="contactBody">
+            <tr>
+                <td class="tdTitle">合同相对方：</td>
+                <td class="request">●</td>
+                <td>
+                    <input type="text" ng-model="relative.relativeName" class="txtNew tt280" name="htxdf_{{$index}}" rule="required"  maxlength='30'/>
+                    <a href="javascript:;" class="btnMini in_block ml_5 miniAdd" ng-show="$first && contract.contractRelativeList.length == 1" ng-click="doInputItem($index , contract.contractRelativeList)"></a>
+                    <a href="javascript:;" class="btnMini in_block ml_5 miniNo"  ng-show="!$first" ng-click="doInputItem($index , contract.contractRelativeList)"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">合同相对方身份：</td>
+                <td class="request">●</td>
+                <td>
+                    <label ng-repeat="type in relativeTypeList" class="mr_20">
+                        <input ng-model="relative.relativeType" type="radio" value="{{type.value}}" name="htxdfsf_{{$parent.$index}}" rule="required" />{{type.name}}
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+
+            <tr ng-repeat="his in contract.cooperationHistoryList">
+                <td class="tdTitle">合作历史：</td>
+                <td class="request"></td>
+                <td>
+                    <input type="text" class="txtNew tt280"  ng-model="his.cooperationHistory" />
+                    <a href="javascript:;" class="btnMini in_block ml_5 miniAdd" ng-show="$first && contract.cooperationHistoryList.length < 3" ng-click="doInputItem($index , contract.cooperationHistoryList)"></a>
+                    <a href="javascript:;" class="btnMini in_block ml_5 miniNo"  ng-show="!$first" ng-click="doInputItem($index , contract.cooperationHistoryList)"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">操作模式：</td>
+                <td class="request">●</td>
+                <td>
+                    <div checkboxcontainer ng-model="contract.operationModeAry" >
+                        <label class="mr_20" ng-repeat="mode in operationModeList">
+                            <input type="checkbox" class="js_checkbox" value="{{mode.value}}" name="czms" rule="required" />{{mode.name}}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">项目重要信息：</td>
+                <td class="request"></td>
+                <td>
+                    <div  checkboxcontainer ng-model="contract.importantInfoAry">
+                        <label class="mr_20" ng-repeat="info in importantInfoList">
+                            <input type="checkbox" class="js_checkbox" value="{{info.value}}" />{{info.name}}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">委托期限起始日：</td>
+                <td class="request">●</td>
+                <td class="lineH200">
+                    <input type="radio" name="wtqxbegin" value="0" ng-model="contract.startTimeType" rule="required checkInput wtDateCompare" groupby="starttype"/>
+                    <input ng-model="$parent.contract.startTime" readonly="readonly" type="text" class="txtDate" date-picker build_onshow="true" name="wtqx_start"  />
+                    <input type="radio" name="wtqxbegin" value="1" ng-model="contract.startTimeType" rule="required" groupby="starttype" ng-change="changeTimeType(1)" class="ml_10" />签约日
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">委托期限到期日：</td>
+                <td class="request">●</td>
+                <td class="lineH200">
+                    <input type="radio" name="wtqxend" value="0" ng-model="contract.endTimeType" rule="required checkInput wtDateCompare" groupby="endtype" />
+                    <input ng-model="$parent.contract.endTime" readonly="readonly" type="text" class="txtDate" date-picker build_onshow="true" name="wtqx_end"  />
+                    <input type="radio" name="wtqxend" value="2" ng-model="contract.endTimeType" rule="required" groupby="endtype" ng-change="changeTimeType(2)" class="ml_10" />售罄日
+                </td>
+            </tr>
+
+            <!-- 佣金相关1 -->
+
+            <tbody ng-controller="commissionInfoCtrl" ng-include="'/static/front/contract/contractAdd/template/yongjinStyle.html'">
+            </tbody>
+            <!-- 佣金相关1 -->
+            <tr>
+                <td class="tdTitle">佣金支付方：</td>
+                <td class="request">●</td>
+                <td>
+						<span checkboxcontainer ng-model="commission.commissionPayerTypeAry">
+							<label class="mr_20" ng-repeat="type in commissionPayerTypeList">
+                                <input type="checkbox" value="{{type.value}}" class="js_checkbox"  groupby="yjzff" name="yjzff" rule="required" />{{type.name}}
+                            </label>
+						</span>
+                    <input ng-model="commission.commissionPayerName" type="text" class="txtNew tt160" name="yjzff_qita" groupby="yjzff" rule="otherMust" maxlength="20"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">其他激励：</td>
+                <td class="request"></td>
+                <td>
+                    <span>成交实物奖 <input ng-model="commission.dealReward" type="text" class="txtNew" maxlength="20"/></span>
+                    <span class="ml_20">带看奖 <input ng-model="commission.takewatchReward" type="text" class="txtNew" maxlength="20"/></span>
+                    <span class="ml_20">其他 <input ng-model="commission.otherReward" type="text" class="txtNew" maxlength="20"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">有效客户：</td>
+                <td class="request"></td>
+                <td>
+                    <div checkboxcontainer ng-model="contract.customerTypeAry">
+                        <label class="mr_20" ng-repeat="cusType in customerTypeList">
+                            <input type="checkbox" class="js_checkbox" value="{{cusType.value}}"/>{{cusType.name}}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">客户有效期：</td>
+                <td class="request"></td>
+                <td>
+                    <!-- <select name="khyxq" rule="required" ng-model="contract.customerValidTimeType" ng-options="type.value as type.name for type in customerValidTimeTypeList">
+                        <option value="">请选择</option>
+                    </select> -->
+                    <input type="text" maxlength="3" name="khyxq" rule="matchNum" class="txtNew" ng-model="contract.customerValidTimeType"><span class="ml_20">天</span><span class="grey999 ml_20">不填即为未约定</span>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">成功分销界定：</td>
+                <td class="request">●</td>
+                <td>
+                    <select name="cgfxjd" rule="required" ng-model="contract.successSaleDefinition"  ng-options="success.value as success.name for success in successSaleDefinitionList">
+                        <option value="">请选择</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 结佣相关 -->
+        <table border="0" cellpadding="5" cellspacing="0" class="tableFormNew" ng-controller="finishCommissionCtrl" ng-include="'/static/front/contract/contractAdd/template/finishCommission.html'">
+        </table>
+        <!-- 结佣相关 -->
+
+        <table border="0" cellpadding="5" cellspacing="0" class="tableFormNew">
+            <tr>
+                <td class="tdTitle" width="150">审核要求：</td>
+                <td class="request" width="20">●</td>
+                <td>
+                    <label ng-repeat="auditRequire in auditRequirementList" class="mr_20">
+                        <input ng-model="contract.auditRequirement" type="radio" value="{{auditRequire.value}}" name="shyq" rule="required" />{{auditRequire.desc}}
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="tdTitle">合同版本：</td>
+                <td class="request">●</td>
+                <td>
+                    <label ng-repeat="contractType in contractTypeList" class="mr_20">
+                        <input ng-model="contract.contractType" type="radio" value="{{contractType.value}}" name="htbb" rule="required" />{{contractType.desc}}
+                    </label>
+                </td>
+            </tr>
+
+            <tr ng-show="canShowPic('代理商营业执照复印件')">
+                <td class="tdTitle">代理商营业执照复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_dlsyyzz"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr ng-show="canShowPic('上级代理商/开发商营业执照复印件')">
+                <td class="tdTitle">上级代理商/开发商<br>营业执照复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_sjyyzz"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+
+            <tr ng-show="canShowPic('营业执照复印件')">
+                <td class="tdTitle">营业执照复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_yyzz"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">预售许可证复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_ysxkz"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr ng-show="canShowPic('分销授权复印件')">
+                <td class="tdTitle">分销授权复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_fxsq"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr ng-show="canShowPic('保函复印件')">
+                <td class="tdTitle">保函复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_bhfyj"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">四证复印件：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_szfyj"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">合同电子档：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_htdzd"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr><tr>
+            <td class="tdTitle">销控表：</td>
+            <td class="request">&nbsp;</td>
+            <td>
+                <dui-upload attach-list="contract.attachList_xkb"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+            </td>
+        </tr>
+            <tr>
+                <td class="tdTitle">启动函：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_qdh"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdTitle">其他特别附件或资料：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_qt"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);"></dui-upload>
+                </td>
+            </tr>
+
+            <tr ng-show="canShowPic('保证金入账凭证')">
+                <td class="tdTitle">保证金入账凭证：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_bzjrzpz"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);" multiple="true"></dui-upload>
+                </td>
+            </tr>
+
+            <tr ng-show="canShowPic('电商授权材料')">
+                <td class="tdTitle">电商授权材料：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_dssqzl"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);" multiple="true"></dui-upload>
+                </td>
+            </tr>
+
+            <tr ng-show="canShowPic('全套产调资料')">
+                <td class="tdTitle">全套产调资料：</td>
+                <td class="request">&nbsp;</td>
+                <td>
+                    <dui-upload attach-list="contract.attachList_qtcdzl"  maxsize="50" domain="yishou" single-submit ="true" precheck-callback="precheckCallback(file)" preview-callback="previewCallback(attach);" multiple="true"></dui-upload>
+                </td>
+            </tr>
+        </table>
+        <p class="txtRight mt_15">
+            <a ng-show="!isSubmit && (contract.id == null || contract.contractStatus == 0)" href="javascript:;" ng-click="submit(0)" class="btn-normal btn-silver in_block">保存</a>
+            <a ng-show="!isSubmit" href="javascript:;" class="btn-normal btn-blue in_block ml_10" ng-click="submit(1)">提交</a>
+            <a ng-show="isSubmit" href="javascript:;" class="btn-normal btn-blue in_block ml_10">提交中</a>
+        </p>
+    </form>
+
+    <!--begin: footer-->
+
+
+
+
+
+
+
+
+
+    <!--begin: footer-->
+    <div class="footer clearFix">&copy;2015 德佑地产</div>
+    <!--end: footer-->
+
+
+
+</body>
+</html>
+<script type="text/javascript" src="http://dui.dooioo.org/public/js/tipsNotice.js?v=0320"></script>
+<script type="text/javascript">
+
+    $(function(){
+        _tipNotice = new __tipNotice(87544);
+
+        _tipNotice.run(true);
+    });
+
+</script>
+<!--end: footer-->
+</div>
+
+
+
+
+
+<div class="popLayer bubbleBox" id="dlzySubmit" style="width:600px">
+    <form id="formAgree">
+        <div class="bubbleBoxTitle clearfix">
+            <h1>代理专员意见</h1>
+            <div class="cls"><a href="javascript:;" class="closePopBox xx" onclick="hidePopupDiv($('#dlzySubmit'))"></a></div>
+        </div>
+        <div class="bubbleBoxCon pd_20">
+            <table border="0" cellpadding="0" cellspacing="0" class="tableFormNew mt_20">
+                <tbody>
+                <tr>
+                    <td class="tdTitle">备注：</td>
+                    <td class="request">●</td>
+                    <td>
+                        <p ng-show="showDlzySubmitErrorMessage"><b class="red">必填</b></p>
+                        <textarea class="tANew tt280" maxlength="200" name="remark" ng-model="contract.remark"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bubbleBoxBtn">
+            <a href="javascript:;" class="btn-small btn-silver in_block" onclick="hidePopupDiv($('#dlzySubmit'))">关闭</a>
+            <a href="javascript:;" class="btn-small btn-blue in_block" ng-click="doSubmit()">提交</a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/directive.js?v=0320"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/WdatePicker.js?v=0320"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/angular-upload-2.0.js?v=0320"></script>
+<script type="text/javascript" src="http://dui.dooioo.com/public/js/validation.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/app.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/controller/contractAddCtrl.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/filter/contractFilter.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/constants/Constants.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/js/contractValidator.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/controller/finishCommissionCtrl.js?v=0320"></script>
+<script type="text/javascript" src="/static/front/common/underscore.js?v="></script>
+<script type="text/javascript" src="/static/front/contract/contractAdd/controller/commissionInfoCtrl.js?v=0320"></script>
+
+<script type="text/javascript">
+    var filing = {"id":281,"filingName":"凿邱掸稀人窒捅腰瓶倚仟怂档氰肛庆砌","filingEmpNo":87544,"filingEmpOrgId":21776,"status":1,"expectedAuditType":1,"expectedAuditTime":null,"createdAt":1426478228507,"signTime":null,"dropTime":null,"filingStatus":1,"cityName":"上海","areaName":"黄浦","followContent":null,"lastFollowId":522,"firstAddressId":319,"firstContactsId":315,"typeId":null,"typeStr":"1/2/3/4/5/6/7","firstAddress":"筷喉睛积路5182号","contactsName":"诀厉难","contactsPhone":"13628030379","contactsType":1,"lastFollowTime":1426478228630,"lastFollowContent":"均慢亿澎戴推辟橡膀云吸地钠惕浓矾荷临可矿\n新增联系人：诀厉难 代理商 13628030379\n项目名称： => 凿邱掸稀人窒捅腰瓶倚仟怂档氰肛庆砌\n预计送审时间： => 待定\n项目类型： => 住宅/别墅/公寓/商住/厂房/商铺/其他\n别名： => 肚躇宇殉鳞甥肄柒哀厌天呼屉\n状态： => 跟进中\n报备人： => 崔晶晶\n项目地址： => 上海黄浦筷喉睛积路5182号\n","lastFollowDays":0,"aliasesList":[{"id":277,"filingId":281,"aliases":"肚躇宇殉鳞甥肄柒哀厌天呼屉","createdAt":1426478228553,"status":1}],"addressList":[{"id":319,"filingId":281,"createdAt":1426478228557,"status":1,"address":"筷喉睛积路5182号","roadName":""}],"contactsList":[{"id":315,"filingId":281,"contactsName":"诀厉难","contactsType":1,"contactsPhone":"13628030379","createdAt":null,"status":1,"createEmpNo":87544,"createName":"崔晶晶"}],"filingTypeList":[{"id":1521,"filingId":281,"typeId":1,"status":1,"filingTypeName":"住宅"},{"id":1522,"filingId":281,"typeId":2,"status":1,"filingTypeName":"别墅"},{"id":1523,"filingId":281,"typeId":3,"status":1,"filingTypeName":"公寓"},{"id":1524,"filingId":281,"typeId":4,"status":1,"filingTypeName":"商住"},{"id":1525,"filingId":281,"typeId":5,"status":1,"filingTypeName":"厂房"},{"id":1526,"filingId":281,"typeId":6,"status":1,"filingTypeName":"商铺"},{"id":1527,"filingId":281,"typeId":7,"status":1,"filingTypeName":"其他"}],"diffDay":4,"filingLikeRepeatList":[],"filingLikeRepeatCount":0,"resignCount":0,"orgName":"代理项目五部","filingEmp":{"userCode":87544,"userName":"崔晶晶","userNameEN":"Vicky","orgId":21776,"orgName":"代理项目五部","orgLongCode":"12020001/120720495/140207133236/120520457/140626105628/140701093939","orgType":"分行","parentId":21735,"positionId":1,"titleName":"项目经理","positionName":"经纪人","positionType":"销售型","mobilePhone":"13761018658","alternatePhone":"13761018658","showedPhone":"13761018658","email":null,"credential":"410822198808283029","experience":"无","sex":"女","status":"正式","leaveDate":null,"joinDate":1331654400000,"latestJoinDate":1331654400000,"levelId":88,"levelName":"项目主任","company":"德佑","companyObject":"Dooioo","companyENLower":"dooioo","partTimeOrgIds":null,"partTimeOrgNames":null,"partTimeSubOrgIds":null,"partTimeSubOrgNames":null,"privileges":[],"managerOrgs":[],"partitionOrgs":[],"partitionSubOrgs":[],"companyOrgs":[],"orgEmployees":[],"partitionOrgEmployees":[],"partitionSubOrgEmployees":[],"companyEmployees":[],"partitionOrgsMap":{},"partitionSubOrgsMap":{},"companyOrgsMap":{},"orgEmployeesMap":{},"partitionOrgEmployeesMap":{},"partitionSubOrgEmployeesMap":{},"companyEmployeesMap":{},"privilegeMap":{},"managerOrgsMap":{},"loginToken":null,"domainSuffix":"dooioo.org"},"contactsTypeName":"代理商","firstAddressAll":"上海黄浦筷喉睛积路5182号","itemType":["住宅","别墅","公寓","商住","厂房","商铺","其他"],"userName":"崔晶晶","typeName":"住宅/别墅/公寓/商住/厂房/商铺/其他","filingStatusName":"跟进中"};
+    var operationModeList = [{"name":"一手房","value":0},{"name":"二手房","value":1},{"name":"其他","value":2}];
+    var importantInfoList = [{"name":"做低","value":0},{"name":"存在租赁","value":1},{"name":"售后包租","value":2},{"name":"售后经营管理","value":3},{"name":"抵押","value":4},{"name":"查封","value":5}];
+    var auditRequirementList = [{"desc":"修改 ","name":"修改","value":0},{"desc":"定稿","name":"定稿","value":1},{"desc":"材料齐全、合同定稿，需要尽快给出审核意见","name":"材料齐全","value":2}];
+    var contractTypeList    = [{"desc":"我司","name":"我司","value":0},{"desc":"相对方（未盖章）","name":"相对方未盖章","value":1},{"desc":"相对方（已盖章）","name":"相对方已盖章","value":2}];
+    var customerTypeList= [{"name":"直系亲属","value":0},{"name":"关联企业","value":1}];
+    //var customerValidTimeTypeList = ;
+    var successSaleDefinitionList = [{"name":"预告登记","value":7},{"name":"付定","value":0},{"name":"签约","value":1},{"name":"首付","value":2},{"name":"银行审批通过","value":3},{"name":"银行放贷","value":4},{"name":"全款结清","value":5},{"name":"出产证","value":8},{"name":"交房","value":6}];
+    var relativeTypeList = [{"name":"开发商","value":0},{"name":"代理商","value":1}];
+    var commissionTypeList= [{"name":"按比例","value":0},{"name":"固定佣金","value":1}];
+    var leapPercentTypeList= [{"name":"是","value":1},{"name":"否","value":0}];
+    var leapPercentComplementTypeList= [{"name":"是","value":1},{"name":"否","value":0}];
+    var leapPercentJudgeTimeTypeList = [{"name":"签约时间","value":0},{"name":"转定时间","value":1}];
+    var leapPercentJudgeTypeList= [{"name":"按套数","value":0},{"name":"按销售额","value":1},{"name":"按销售面积","value":2}];
+    var commissionPayerTypeList= [{"name":"相对方","value":0},{"name":"其他","value":1}];
+    var finishCommissionConditionList= [{"name":"无","value":0},{"name":"根据是否贷款","value":1},{"name":"根据销售情况","value":2},{"name":"根据相对方身份","value":3}];
+    var finishCommissionTypeList= [{"desc":"签约及首付结全佣","name":"签约及首付结全佣","value":0},{"desc":"全款到账后结全佣","name":"全款到账后结全佣","value":1},{"desc":"按交易进度结佣","name":"按交易进度结佣","value":2},{"desc":"按支付比例结佣（等比） ","name":"按支付比例结佣等比","value":3},{"desc":"按支付比例结佣（非等比）","name":"按支付比例结佣非等比","value":4}];
+    var filingTypeList = [{"id":1,"name":"住宅"},{"id":2,"name":"别墅"},{"id":3,"name":"公寓"},{"id":4,"name":"商住"},{"id":5,"name":"厂房"},{"id":6,"name":"商铺"},{"id":7,"name":"其他"}];
+    var payCommissionLimitTypeList = [{"name":"预告登记","value":8},{"name":"付定金","value":1},{"name":"签约","value":2},{"name":"首付","value":3},{"name":"银行审批通过","value":4},{"name":"银行房贷","value":5},{"name":"全款结清","value":6},{"name":"出产证","value":9},{"name":"交房","value":7}];
+
+    var commissionConditionList = [{"desc":"销售类型","name":"销售类型","value":0},{"desc":"销售时间","name":"销售时间","value":1}];
+    var contractEntrustTypeList = [{"name":"选择时间","value":0},{"name":"签约日","value":1},{"name":"售罄日","value":2}];
+    var sellHouseLayoutTypeMap = {"1":["一房","两房","三房","大平层","复式","其他"],"2":["叠加","独栋","联排","类独栋","其他"],"3":["一房","两房","三房","大平层","复式","其他"],"4":["一房","两房","LOFT","其他"]};
+    var companyNameList = [{"name":"上海德佑物业顾问有限公司","value":"上海德佑物业顾问有限公司"},{"name":"德佑房地产经纪有限公司","value":"德佑房地产经纪有限公司"},{"name":"上海德融房地产经纪有限公司","value":"上海德融房地产经纪有限公司"}];
+    var finishCashTypeList = [{"name":"无现金奖","value":0},{"name":"与佣金结佣方式相同","value":1},{"name":"与佣金结佣方式不同","value":2}];
+    var date = 1426821001547;
+    var picBaseUrl = "http://fs.dooioo.org/fetch/vp/yishou/";
+    var needWriteSuggest = 'true';
+    var id = '99';
+</script>
+</body>
+</html>
