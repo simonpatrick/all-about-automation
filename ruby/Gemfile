@@ -1,0 +1,6 @@
+# A sample Gemfile
+source "https://rubygems.org"
+#source "https://taobao.ruby.org"
+
+# gem "rails"
+gem 'selenium-webdriver', '~> 2.48', '>= 2.48.1'
